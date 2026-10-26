@@ -1,6 +1,7 @@
 // Ficha de un proyecto: es el panel que vive adentro del visor.
 import { dupla, proyectos } from '../data/proyectos.js';
 import { montarReproductor } from './reproductor.js';
+import { abrirLupa } from './lupa.js';
 
 const CLAVE_ESTRELLAS = 'uyg:estrellas';
 
@@ -48,7 +49,7 @@ function pegatinasHTML(p) {
 
 function pestanasHTML(p) {
   const tabs = [];
-  if (p.video) tabs.push({ id: 'video', texto: 'VIDEOCASO' });
+  if (p.video) tabs.push({ id: 'video', texto: p.video.pestaña || 'VIDEOCASO' });
   if (p.board) tabs.push({ id: 'board', texto: 'BOARD' });
   if (p.piezas) tabs.push({ id: 'piezas', texto: p.piezas.pestaña });
   tabs.push({ id: 'estrellas', texto: 'ESTRELLAS' });
@@ -70,7 +71,7 @@ function videoHTML(p) {
     : '';
   return `
     <section class="ficha__seccion ficha__video" id="video-${p.slug}">
-      <h3 class="ficha__rotulo adv">Videocaso</h3>
+      <h3 class="ficha__rotulo adv">${p.video.rotulo || 'Videocaso'}</h3>
       <div class="reproductor" data-video="${p.video.archivo}" data-poster="${p.video.poster}"
            data-alt="${p.video.alt}" data-dur="${p.video.dur}" data-n="${p.n}" data-titulo="${p.titulo}"
            style="--color:${p.color}"></div>
@@ -83,14 +84,15 @@ function boardHTML(p) {
   return `
     <section class="ficha__seccion ficha__board" id="board-${p.slug}">
       <h3 class="ficha__rotulo adv">Board</h3>
-      <div class="board__marco"><img src="${p.board.img}" alt="${p.board.alt}" loading="lazy" draggable="false"></div>
+      <div class="board__marco"><button type="button" class="pieza" aria-label="Ver ${p.board.alt}"><img src="${p.board.img}" alt="${p.board.alt}" loading="lazy" draggable="false"></button></div>
     </section>`;
 }
 
 function piezasHTML(p) {
   if (!p.piezas) return '';
   const z = p.piezas;
-  const img = (it) => `<img src="${it.img}" alt="${it.alt}" loading="lazy" draggable="false">`;
+  const img = (it) =>
+    `<button type="button" class="pieza" aria-label="Ver ${it.alt}"><img src="${it.img}" alt="${it.alt}" loading="lazy" draggable="false"></button>`;
   let cuerpo = '';
   if (z.layout === 'una-grande-dos-chicas') {
     cuerpo = `
@@ -176,6 +178,23 @@ export function fichaHTML(p) {
 
 export function montarFicha(panel, p, { irA } = {}) {
   const scroll = panel.querySelector('.panel__scroll');
+
+  // tocar la parte de arriba lleva a la primera sección: en casi todas, el videocaso
+  const hero = panel.querySelector('.ficha__hero');
+  const primera = panel.querySelector('.ficha__seccion[id]');
+  if (hero && primera) {
+    hero.addEventListener('click', (e) => {
+      if (e.target.closest('button, a')) return;
+      scroll.scrollTo({ top: primera.offsetTop - 4, behavior: 'smooth' });
+    });
+  }
+
+  panel.addEventListener('click', (e) => {
+    const b = e.target.closest('.pieza');
+    if (!b) return;
+    const im = b.querySelector('img');
+    abrirLupa(im.currentSrc || im.src, im.alt);
+  });
 
   panel.querySelectorAll('[data-ir]').forEach((boton) => {
     boton.addEventListener('click', () => {

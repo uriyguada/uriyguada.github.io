@@ -315,6 +315,23 @@
 }
 
 /* ---- piezas ---- */
+.pieza {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.pieza img {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.pieza:hover img {
+  transform: scale(1.012);
+}
+
 .piezas__grande,
 .piezas__caja {
   border: 3px solid var(--tinta);
@@ -337,7 +354,7 @@
 
 .piezas__tres {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(12px, 1.7vw, 24px);
 }
 
@@ -349,6 +366,7 @@
 }
 
 .piezas__caja--contain img {
+  height: auto;
   object-fit: contain;
   background: var(--papel-claro);
 }
@@ -356,7 +374,7 @@
 /* ---- estrellas ---- */
 .ficha__estrellas {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   gap: 20px;
   flex-wrap: wrap;
@@ -366,7 +384,7 @@
 .estrellas__tuyas {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 6px;
 }
 

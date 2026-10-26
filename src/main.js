@@ -5,6 +5,7 @@ import './styles/contacto.css';
 import './styles/tierlist.css';
 import './styles/visor.css';
 import './styles/ficha.css';
+import './styles/lupa.css';
 
 import { montarHero } from './componentes/hero.js';
 import { montarCartelera } from './componentes/cartelera.js';

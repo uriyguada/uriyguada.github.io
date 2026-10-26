@@ -40,8 +40,7 @@ body::after{
   inset:0;
   background-image:url('/textura/grano.png');
   background-size:360px 360px;
-  mix-blend-mode:multiply;
-  opacity:.45;
+  opacity:.4;
   pointer-events:none;
   z-index:80;
 }

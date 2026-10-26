@@ -1,0 +1,80 @@
+.lupa {
+  position: fixed;
+  inset: 0;
+  z-index: 78;
+  background: rgba(20, 18, 16, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lupa[hidden] {
+  display: none;
+}
+
+body.con-lupa {
+  overflow: hidden;
+}
+
+.lupa__caja {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  scrollbar-width: none;
+}
+
+.lupa__caja::-webkit-scrollbar {
+  display: none;
+}
+
+.lupa__foto {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  cursor: zoom-in;
+}
+
+.lupa__foto--grande {
+  max-width: none;
+  max-height: none;
+  width: 190%;
+  height: auto;
+  cursor: zoom-out;
+}
+
+.lupa__cerrar {
+  position: absolute;
+  right: 26px;
+  top: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--papel);
+  background: var(--sala);
+  color: var(--papel);
+  font-size: 22px;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.lupa__cerrar:hover {
+  transform: rotate(90deg);
+}
+
+@media (max-width: 720px) {
+  .lupa__caja {
+    padding: 12px;
+  }
+
+  .lupa__cerrar {
+    right: 12px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}

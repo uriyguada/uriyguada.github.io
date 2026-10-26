@@ -53,9 +53,20 @@ export function montarVisor({ alCerrar } = {}) {
     if (!conTransicion) requestAnimationFrame(() => (pista.style.transition = ''));
   }
 
+  function pausarVideos(panel) {
+    const lista = panel ? [panel] : paneles;
+    for (const p of lista) {
+      for (const video of p.querySelectorAll('video')) {
+        if (!video.paused) video.pause();
+      }
+    }
+  }
+
   function pintar() {
     paneles.forEach((p, k) => {
       p.classList.toggle('panel--activo', k === i);
+      // solo se pintan la activa y sus dos vecinas: el resto no gasta nada
+      p.classList.toggle('panel--vecino', Math.abs(k - i) === 1 || Math.abs(k - i) === paneles.length - 1);
       p.setAttribute('aria-hidden', String(k !== i));
       p.querySelector('.panel__scroll').tabIndex = k === i ? 0 : -1;
     });
@@ -64,6 +75,7 @@ export function montarVisor({ alCerrar } = {}) {
 
   function ir(k, { empujarUrl = false } = {}) {
     const total = proyectos.length;
+    if (paneles[i]) pausarVideos(paneles[i]);
     i = ((k % total) + total) % total;
     colocar(true);
     pintar();
@@ -94,15 +106,17 @@ export function montarVisor({ alCerrar } = {}) {
 
     if (origen && !reducido()) {
       const { x, y } = origen;
+      visor.classList.add('visor--abriendo');
       visor.style.clipPath = `circle(0px at ${x}px ${y}px)`;
       requestAnimationFrame(() => {
-        visor.style.transition = 'clip-path .6s cubic-bezier(.65,0,.2,1)';
+        visor.style.transition = 'clip-path .55s cubic-bezier(.4,0,.2,1)';
         visor.style.clipPath = `circle(140% at ${x}px ${y}px)`;
       });
       setTimeout(() => {
         visor.style.transition = '';
         visor.style.clipPath = '';
-      }, 650);
+        visor.classList.remove('visor--abriendo');
+      }, 600);
     }
     paneles[i].querySelector('.panel__scroll').focus({ preventScroll: true });
   }
@@ -115,12 +129,14 @@ export function montarVisor({ alCerrar } = {}) {
       return;
     }
     abierto = false;
+    pausarVideos();
+    // la entrada se recompone ya, tapada por el visor: nadie tiene que verla arreglarse
+    if (slugOrigen && alCerrar) alCerrar(slugOrigen);
     const terminar = () => {
       visor.hidden = true;
       visor.style.transition = '';
       visor.style.clipPath = '';
       document.body.classList.remove('con-visor');
-      if (slugOrigen && alCerrar) alCerrar(slugOrigen);
       slugOrigen = null;
     };
 

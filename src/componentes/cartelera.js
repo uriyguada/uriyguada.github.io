@@ -52,7 +52,9 @@ export function montarCartelera(seccion, { alAbrir } = {}) {
       rotas.set(slug, volver);
       if (alAbrir) {
         const r = entrada.getBoundingClientRect();
-        alAbrir(slug, { x: r.left + r.width / 2, y: r.top + r.height / 2 });
+        const origen = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        // primero se ve cortarse la entrada; recién después entra el visor
+        setTimeout(() => alAbrir(slug, origen), 260);
       }
     });
   });
@@ -95,11 +97,10 @@ function romper(entrada) {
     gsap.set(talon, vuela);
   }
 
+  // Se recompone de una, mientras el visor todavía tapa todo: la entrada rota no se ve nunca.
   return function recomponer() {
-    gsap
-      .timeline({ onComplete: () => entrada.classList.remove('entrada--rota') })
-      .set(dentado, { autoAlpha: 0 }, 0.25)
-      .to(talon, { x: 0, y: 0, rotate: 0, duration: 0.55, ease: 'back.out(1.5)' }, 0)
-      .to(cuerpo, { x: 0, y: 0, rotate: 0, scale: 1, duration: 0.5, ease: 'back.out(1.5)' }, 0.08);
+    gsap.set([cuerpo, talon], { x: 0, y: 0, rotate: 0, scale: 1 });
+    gsap.set(dentado, { autoAlpha: 0 });
+    entrada.classList.remove('entrada--rota');
   };
 }

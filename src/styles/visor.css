@@ -2,10 +2,10 @@
   position: fixed;
   inset: 0;
   z-index: 70;
-  background: rgba(20, 18, 16, 0.6);
-  -webkit-backdrop-filter: blur(12px);
-          backdrop-filter: blur(12px);
+  /* sin backdrop-filter: desenfocar toda la página trababa la apertura */
+  background: rgba(16, 14, 12, 0.88);
   overflow: hidden;
+  will-change: clip-path;
 }
 
 .visor[hidden] {
@@ -46,6 +46,17 @@ body.con-visor {
   transform: none;
   filter: none;
   cursor: default;
+}
+
+/* las fichas lejanas no se pintan: solo la activa y las dos de al lado */
+.panel:not(.panel--activo):not(.panel--vecino) {
+  visibility: hidden;
+}
+
+/* mientras abre el barrido, los paneles no animan: se mueve una cosa sola */
+.visor--abriendo .panel,
+.visor--abriendo .visor__pista {
+  transition: none;
 }
 
 .panel__scroll {

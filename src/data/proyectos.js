@@ -313,6 +313,8 @@ export const proyectos = [
     video: {
       origen: '../3 - Clari.mp4',
       archivo: '/video/clari.mp4',
+      rotulo: 'Comercial',          // no es un videocaso
+      pestaña: 'COMERCIAL',
       poster: '/img/clari/poster-video-fiesta-15.jpg',
       alt: 'Fotograma: la entrada de Clari a su fiesta de 15 con vestido violeta tornasol',
       dur: '00:58',
