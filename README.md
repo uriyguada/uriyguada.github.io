@@ -27,15 +27,18 @@ Los videos no están acá: Claude Code los comprime desde la carpeta de arriba.
 
 ## Pendientes (TODO)
 
-- [ ] **Comprar las licencias de Advercase y Roycella** antes de publicar. Las que hay son demos de uso personal y no tienen tildes ni ñ.
+- [ ] **Comprar las licencias de Advercase y Roycella.** El sitio ya está publicado con las demos. Las que hay son demos de uso personal y no tienen tildes ni ñ.
 - [ ] Opcional: reemplazar `public/sound/ticket-rotura*.webm` por una grabación real de una entrada rompiéndose. Los sonidos actuales están sintetizados.
+- [ ] Imagen de Open Graph de 1200×630 (hoy el link no muestra preview al compartirlo).
 - [ ] Revisar las versiones mobile en un teléfono real.
 - [ ] Los videos pesan 93 MB en total (ninguno pasa los 25 MB). Entran en GitHub Pages, pero si el repo queda pesado, la
       alternativa es subirlos a Vimeo sin listar y usar el mismo reproductor con su API.
 
 ## Estado del código
 
-La **home** está construida con Vite + JS vanilla + GSAP, siguiendo `referencias/placas/Main.dc.html`.
+La web está publicada en **https://uriyguada.github.io/** y construida con Vite + JS vanilla + GSAP,
+siguiendo `referencias/placas/`. Cada push a `main` dispara el workflow de Actions, que buildea y
+deploya a Pages (la fuente de Pages tiene que quedar en "GitHub Actions", no en "branch").
 
 ```bash
 npm install
@@ -52,7 +55,7 @@ npm run build   # dist/
 | Mobile (360–720) | Hecho |
 | Visor horizontal + fichas de los 8 proyectos | Hecho (flechas, teclado, rueda, arrastre, URL `#/funcion/slug`) |
 | Videocasos + reproductor A (línea) | Hecho: los 6 videos comprimidos a 1080p en `public/video/` |
-| Publicación en GitHub Pages | Pendiente |
+| Publicación | Hecho: **https://uriyguada.github.io/** (repo `uriyguada/uriyguada.github.io`) |
 
 ### La firma
 
