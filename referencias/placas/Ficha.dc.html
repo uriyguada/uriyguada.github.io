@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Uri &amp; Guada — Ficha 01: Andá pidiendo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Advercase';src:url('/fonts/Advercase-Regular.otf') format('opentype');font-weight:400;font-style:normal}
+@font-face{font-family:'Roycella';src:url('/fonts/Roycella.ttf') format('truetype')}
+body{margin:0}
+a{color:#1B1916;text-decoration:none}a:hover{color:#BA0101}
+button{font:inherit;cursor:pointer}
+.adv{font-family:'Advercase',Georgia,serif}
+.roy{font-family:'Roycella',cursive;font-weight:400}
+.mono{font-family:'Courier Prime',monospace}
+.arch{font-family:'Archivo Narrow',sans-serif}
+.grain{position:absolute;inset:0;background-image:url('/textura/grano.png');pointer-events:none;mix-blend-mode:multiply;z-index:50}
+.duo{position:relative;overflow:hidden}
+.duo img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.25) brightness(1.08);mix-blend-mode:multiply}
+.notch{-webkit-mask:radial-gradient(circle 16px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 16px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.notch-big{-webkit-mask:radial-gradient(circle 34px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 34px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 34px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 34px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.sprocket{height:30px;background:repeating-linear-gradient(90deg,#0000 0 12px,#EEE6D3 12px 28px,#0000 28px 40px);background-clip:content-box;padding:9px 0;box-sizing:border-box}
+.tab{padding:18px 28px;font-weight:700;font-size:16px;letter-spacing:.12em;border-right:2px solid #1B1916}
+.s1{position:absolute;left:-34px;top:-28px;transform:rotate(-6deg);border:3px solid #1B1916;border-radius:12px;padding:12px 24px;font-weight:700;font-size:26px;letter-spacing:.02em;color:#1B1916;z-index:2}
+.s2{position:absolute;right:-90px;top:-90px;transform:rotate(12deg);z-index:2}
+.s3{position:absolute;right:-85px;bottom:-85px;width:170px;height:170px;border:3px solid #1B1916;clip-path:polygon(50% 0%,61% 18%,82% 10%,80% 32%,100% 40%,85% 56%,98% 76%,76% 78%,70% 100%,52% 86%,34% 100%,26% 80%,4% 80%,14% 60%,0% 42%,20% 32%,16% 10%,38% 18%);display:flex;align-items:center;justify-content:center;transform:rotate(8deg);font-weight:700;font-size:23px;line-height:.95;text-align:center;color:#1B1916;z-index:2}
+.s4{position:absolute;left:-30px;bottom:-24px;transform:rotate(-4deg);border:3px solid #1B1916;padding:10px 26px;font-family:'Courier Prime',monospace;font-weight:700;font-size:19px;letter-spacing:.06em;color:#1B1916;clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,14px 100%,0 50%);z-index:2}
+</style>
+</helmet>
+<div class="arch" style="position: relative; width: 1440px; min-height: 4600px; background: #EEE6D3; color: #1B1916; overflow: hidden">
+<div class="grain" style="opacity: {{grano}}"></div>
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 22px 80px; border-bottom: 2px solid #1B1916">
+<a href="Main.dc.html" class="roy" style="font-size: 48px; line-height: 1">Uri &amp; Guada</a>
+<nav style="display: flex; gap: 44px; font-size: 16px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase">
+<a href="Cartelera.dc.html" style="color: #BA0101">Cartelera</a>
+<a href="Tierlist.dc.html">Tierlist</a>
+<a href="Main.dc.html#contacto">Contacto</a>
+</nav>
+<a href="Main.dc.html#contacto" class="notch" style="background: #BA0101; color: #EEE6D3; padding: 15px 32px; font-weight: 700; letter-spacing: 0.14em; font-size: 14px">SACAR ENTRADA</a>
+</header>
+
+<section style="position: relative; background: #BA0101; color: #F4E9D6; padding: 46px 80px 90px">
+<div class="mono" style="display: flex; align-items: center; gap: 18px; font-size: 13px; letter-spacing: 0.16em"><a href="Cartelera.dc.html" style="color: #F4E9D6">← CARTELERA</a><span>FUNCIÓN 01</span><span style="flex: 1; height: 1px; background: #F4E9D6"></span><span>PEDIDOSYA</span></div>
+<div class="mono" style="display: flex; justify-content: center; gap: 70px; border: 2px solid #F4E9D6; border-radius: 40px; padding: 12px 30px; margin: 38px auto 0; width: 820px; font-size: 15px; letter-spacing: 0.14em"><span>DIR. DE ARTE · URI BORITS</span><span>REDACCIÓN · GUADA ALONSO MONTEROS</span></div>
+<div style="text-align: center; font-size: 210px; font-weight: 700; line-height: 0.86; letter-spacing: -0.03em; margin-top: 26px">ANDÁ<br>PIDIENDO</div>
+<div class="mono" style="text-align: center; font-size: 22px; margin-top: 8px">una idea para PedidosYa</div>
+<div style="position: relative; width: 1120px; margin: 70px auto 0">
+<div class="duo" style="height: 600px; border-radius: 46px; background: #F2D3BF; border: 3px solid #1B1916"><img src="/img/anda-pidiendo/hero-sillon.jpg" alt="Hombre dormido en el sillón esperando su pedido" style="object-position: 50% 30%"></div>
+<div class="s1" style="background: #EBA5B3">VÍA PÚBLICA</div>
+<svg class="s2" width="180" height="180" viewBox="0 0 180 180" aria-hidden="true"><defs><path id="f1s2" d="M90,90 m-64,0 a64,64 0 1,1 128,0 a64,64 0 1,1 -128,0"></path></defs><circle cx="90" cy="90" r="87" fill="#E9A06A" stroke="#1B1916" stroke-width="3"></circle><circle cx="90" cy="90" r="46" fill="none" stroke="#1B1916" stroke-width="2"></circle><text font-family="Courier Prime" font-size="14" font-weight="700" fill="#1B1916" letter-spacing="3"><textPath href="#f1s2">SUBTE DE BUENOS AIRES · LÍNEAS A–H ·</textPath></text><text x="90" y="99" text-anchor="middle" font-family="Archivo Narrow" font-weight="700" font-size="30" fill="#1B1916">SUBTE</text></svg>
+<div class="s3" style="background: #EBC54C">LA MÁS<br>PEDIDA</div>
+</div>
+<div class="mono" style="text-align: center; font-size: 22px; line-height: 1.5; letter-spacing: 0.06em; max-width: 1000px; margin: 80px auto 0; font-weight: 700">SI PEDÍS MIENTRAS VIAJÁS EN SUBTE, CUANDO LLEGÁS A TU CASA LA COMIDA YA TE ESTÁ ESPERANDO.</div>
+</section>
+
+<nav style="display: flex; border-bottom: 2px solid #1B1916; padding: 0 80px" aria-label="Secciones de la ficha">
+<a href="#video" class="tab" style="border-left: 2px solid #1B1916; background: #1B1916; color: #EEE6D3">VIDEOCASO</a>
+<a href="#board" class="tab">BOARD</a>
+<a href="#graficas" class="tab">GRÁFICAS</a>
+<a href="#estrellas" class="tab">ESTRELLAS</a>
+</nav>
+
+<section id="video" style="background: #141210; color: #EEE6D3; padding: 90px 80px 100px">
+<div class="adv" style="font-size: 130px; line-height: 0.8; margin-bottom: 40px">Videocaso</div>
+<dc-import name="Reproductor" img="/img/anda-pidiendo/poster-video.jpg" alt="Fotograma del videocaso en el andén del subte" color="#EBA5B3" n="01" titulo="ANDÁ PIDIENDO" dur="00:53" hint-size="100%,720px"></dc-import>
+<div style="margin-top: 34px; background: #0A0908">
+<div class="sprocket"></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; padding: 0 12px">
+<img src="/img/anda-pidiendo/anden.jpg" alt="Andén del subte" style="width: 100%; height: 168px; object-fit: cover; display: block">
+<img src="/img/anda-pidiendo/mapa.jpg" alt="Mapa del pedido" style="width: 100%; height: 168px; object-fit: cover; display: block">
+<img src="/img/anda-pidiendo/grafica-carabobo.jpg" alt="Gráfica de Carabobo en el andén" style="width: 100%; height: 168px; object-fit: cover; display: block">
+<img src="/img/anda-pidiendo/hero-sillon.jpg" alt="Hombre esperando en el sillón" style="width: 100%; height: 168px; object-fit: cover; display: block">
+</div>
+<div class="sprocket"></div>
+</div>
+</section>
+
+<section id="board" style="padding: 100px 80px 110px; background: #E2D7C0">
+<div class="adv" style="font-size: 130px; line-height: 0.8; margin-bottom: 40px">Board</div>
+<div style="background: #F6F1E6; border: 3px solid #1B1916; padding: 36px; box-shadow: 14px 14px 0 #1B1916"><img src="/img/anda-pidiendo/board.jpg" alt="Board final de Andá pidiendo" style="display: block; width: 100%; height: 820px; object-fit: contain; background: #FFFFFF"></div>
+</section>
+
+<section id="graficas" style="padding: 100px 80px 110px; background: #EBA5B3">
+<div class="adv" style="font-size: 130px; line-height: 0.8; color: #4A0A18; margin-bottom: 44px">Las piezas</div>
+<div style="border: 3px solid #1B1916"><img src="/img/anda-pidiendo/graficas.jpg" alt="Cuatro gráficas de estación" style="display: block; width: 100%; height: 700px; object-fit: cover"></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 24px">
+<div style="border: 3px solid #1B1916; height: 380px; overflow: hidden"><img src="/img/anda-pidiendo/grafica-carabobo.jpg" alt="Gráfica de Carabobo instalada en el andén" style="width: 100%; height: 100%; object-fit: cover; display: block"></div>
+<div style="border: 3px solid #1B1916; height: 380px; overflow: hidden"><img src="/img/anda-pidiendo/anden.jpg" alt="Andén del subte" style="width: 100%; height: 100%; object-fit: cover; display: block"></div>
+</div>
+</section>
+
+<section id="estrellas" style="padding: 90px 80px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1B1916">
+<div style="font-size: 120px; line-height: 1; letter-spacing: 6px" aria-label="Promedio: cuatro estrellas y media">★★★★½</div>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
+<div class="mono" style="font-size: 13px; letter-spacing: 0.16em">TU CALIFICACIÓN</div>
+<div style="display: flex" role="radiogroup" aria-label="Tu calificación">
+<sc-for list="{{picker}}" as="s" hint-placeholder-count="5"><button type="button" role="radio" aria-checked="{{s.on}}" aria-label="{{s.label}}" onClick="{{s.pick}}" style="background: transparent; border: 0; padding: 4px; font-size: 64px; line-height: 1; color: {{s.color}}">★</button></sc-for>
+</div>
+</div>
+</section>
+
+<section style="padding: 90px 80px 110px">
+<div class="mono" style="font-size: 14px; letter-spacing: 0.2em; margin-bottom: 20px">PRÓXIMA FUNCIÓN ———</div>
+<a href="FichaMuchaMerd.dc.html" class="notch-big" style="display: flex; height: 250px; background: #8EC8D2; color: #0F4C57">
+<div class="duo" style="width: 420px; background: #8EC8D2"><img src="/img/mucha-merd/logo-horizontal.jpg" alt="Logo de Mucha merd"></div>
+<div style="flex: 1; padding: 34px 50px; display: flex; flex-direction: column; justify-content: center; gap: 8px">
+<div class="mono" style="font-size: 13px; letter-spacing: 0.14em">FUNCIÓN 02 · EL OJO DE IBEROAMÉRICA</div>
+<div style="font-size: 96px; font-weight: 700; line-height: 0.85">MUCHA MERD</div>
+</div>
+<div style="width: 200px; border-left: 3px dashed #0F4C57; background: #F6EEDC; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; letter-spacing: 0.12em">VER →</div>
+</a>
+</section>
+<footer class="mono" style="background: #1B1916; color: #B9AF9C; padding: 28px 80px; font-size: 12px; letter-spacing: 0.14em">© URI &amp; GUADA</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;grano&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:1,&quot;step&quot;:0.05,&quot;default&quot;:0.15,&quot;section&quot;:&quot;Textura&quot;},&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:4600}}">
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { rating: 0 }; }
+  renderVals() {
+    const picker = [1, 2, 3, 4, 5].map((n) => ({
+      on: this.state.rating === n ? 'true' : 'false',
+      label: n + (n === 1 ? ' estrella' : ' estrellas'),
+      color: n <= this.state.rating ? '#E99D25' : '#B9AF9C',
+      pick: () => this.setState({ rating: n })
+    }));
+    return { grano: this.props.grano ?? 0.8, picker };
+  }
+}
+</script>
+</body>
+</html>

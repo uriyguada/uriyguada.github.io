@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Uri &amp; Guada — Cartelera mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Advercase';src:url('/fonts/Advercase-Regular.otf') format('opentype');font-weight:400}
+@font-face{font-family:'Roycella';src:url('/fonts/Roycella.ttf') format('truetype')}
+body{margin:0}
+a{color:#1B1916;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.adv{font-family:'Advercase',Georgia,serif}
+.roy{font-family:'Roycella',cursive}
+.mono{font-family:'Courier Prime',monospace}
+.arch{font-family:'Archivo Narrow',sans-serif}
+.grain{position:absolute;inset:0;background-image:url('/textura/grano.png');pointer-events:none;mix-blend-mode:multiply;z-index:50}
+.duo img{filter:grayscale(1) contrast(1.25) brightness(1.08);mix-blend-mode:multiply}
+.notch-s{-webkit-mask:radial-gradient(circle 14px at 0 80%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 80%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 14px at 0 80%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 80%,#0000 98%,#000) right/51% 100% no-repeat}
+.barcode{background:repeating-linear-gradient(90deg,#1B1916 0 2px,#0000 2px 4px,#1B1916 4px 5px,#0000 5px 9px,#1B1916 9px 12px,#0000 12px 14px)}
+</style>
+</helmet>
+<div class="arch" style="position: relative; width: 390px; min-height: 2500px; background: #EEE6D3; color: #1B1916; overflow: hidden">
+<div class="grain" style="opacity: {{grano}}"></div>
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 2px solid #1B1916">
+<a href="HomeMobile.dc.html" class="roy" style="font-size: 32px; line-height: 1">Uri &amp; Guada</a>
+<button aria-label="Abrir menú" style="width: 44px; height: 44px; border: 2px solid #1B1916; background: transparent; display: flex; align-items: center; justify-content: center"><svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" fill="none" stroke="#1B1916" stroke-width="2.4"><path d="M0 1h20M0 7h20M0 13h20"></path></svg></button>
+</header>
+<section style="padding: 36px 16px 0">
+<div class="adv" style="font-size: 96px; line-height: 0.8; letter-spacing: -0.02em; border-bottom: 2px solid #1B1916; padding-bottom: 22px">Cartelera</div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 26px; padding: 30px 16px 50px">
+<sc-for list="{{entradas}}" as="t" hint-placeholder-count="8">
+<a href="FichaMobile.dc.html" class="notch-s" style="display: flex; flex-direction: column; background: {{t.color}}; color: {{t.dark}}; box-shadow: 0 10px 18px rgba(27,25,22,0.14); transform: rotate({{t.rot}}deg)">
+<div style="display: flex; gap: 14px; padding: 18px 16px 16px">
+<div class="{{t.frame}}" style="flex: none; width: 120px; height: 150px; background: {{t.bg}}; border: 4px solid #F6EEDC; box-sizing: border-box; overflow: hidden"><img src="{{t.img}}" alt="{{t.alt}}" style="width: 100%; height: 100%; object-fit: {{t.fit}}; object-position: {{t.pos}}; display: block"></div>
+<div style="display: flex; flex-direction: column; min-width: 0; flex: 1">
+<div class="mono" style="font-size: 10px; letter-spacing: 0.08em">FUNCIÓN {{t.n}} · {{t.marca}}</div>
+<div style="font-size: 36px; font-weight: 700; line-height: 0.88; margin-top: auto">{{t.titulo}}</div>
+</div>
+</div>
+<div style="background: #F6EEDC; border-top: 3px dashed {{t.dark}}; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between">
+<span class="adv" style="font-size: 18px">Uri &amp; Guada</span>
+<span class="barcode" style="width: 60px; height: 20px"></span>
+</div>
+</a>
+</sc-for>
+</section>
+<footer class="mono" style="background: #1B1916; color: #B9AF9C; padding: 22px 16px; font-size: 10px; letter-spacing: 0.12em; text-align: center">© URI &amp; GUADA</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"grano":{"editor":"range","min":0,"max":1,"step":0.05,"default":0.8,"section":"Textura"},"$preview":{"width":390,"height":2500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const entradas = [
+      { n: '01', titulo: 'ANDÁ PIDIENDO', marca: 'PEDIDOSYA', color: '#EBA5B3', dark: '#7A1229', img: '/img/anda-pidiendo/hero-sillon.jpg', alt: 'Hombre dormido en el sillón', frame: 'duo', bg: '#EBA5B3', fit: 'cover', pos: '50% 30%', rot: -1 },
+      { n: '02', titulo: 'MUCHA MERD', marca: 'EL OJO', color: '#8EC8D2', dark: '#0F4C57', img: '/img/mucha-merd/logo-vertical.jpg', alt: 'Logo de Mucha merd', frame: 'duo', bg: '#8EC8D2', fit: 'cover', pos: '50% 60%', rot: 1 },
+      { n: '03', titulo: 'LA P#%! QUE TE PARIÓ', marca: 'CS2', color: '#E2662C', dark: '#3E1303', img: '/img/lpqtp/hero-soldado.jpg', alt: 'Soldado de Counter-Strike disparando', frame: 'duo', bg: '#E2662C', fit: 'cover', pos: '50% 40%', rot: -1 },
+      { n: '04', titulo: 'SPOTIFUCK', marca: 'SPOTIFY', color: '#86AE76', dark: '#1E3B16', img: '/img/spotifuck/pareja.jpg', alt: 'Pareja animada de Spotifuck', frame: 'duo', bg: '#86AE76', fit: 'cover', pos: '50% 40%', rot: 1 },
+      { n: '05', titulo: 'NO ME BAÑO', marca: 'DOVE MEN+CARE', color: '#8FA8CF', dark: '#1C2D4F', img: '/img/no-me-bano/mural.jpg', alt: 'Mural No me baño de Dove Men+Care', frame: 'duo', bg: '#8FA8CF', fit: 'cover', pos: '50% 50%', rot: -1 },
+      { n: '06', titulo: 'KAMASUTRA', marca: 'CENITAL', color: '#D8C7A2', dark: '#6E0000', img: '/img/kamasutra/grafica-eeuu-china.jpg', alt: 'Gráfica Kamasutra', frame: 'duo', bg: '#D8C7A2', fit: 'cover', pos: '50% 40%', rot: 1 },
+      { n: '07', titulo: 'CÓDIGOS DE REUNIÓN', marca: 'JOHNNIE WALKER', color: '#EBC54C', dark: '#1F3A8A', img: '/img/codigos/key-visual.jpg', alt: 'Key visual de Códigos de reunión', frame: 'duo', bg: '#EBC54C', fit: 'cover', pos: '80% 50%', rot: -1 },
+      { n: '08', titulo: 'CLARI', marca: '★', color: '#BBA7D8', dark: '#3B2563', img: '/img/clari/ticket.jpg', alt: 'Fotograma de Clari', frame: 'duo', bg: '#BBA7D8', fit: 'cover', pos: '50% 50%', rot: 1 }
+    ];
+    return { grano: this.props.grano ?? 0.8, entradas };
+  }
+}
+</script>
+</body>
+</html>

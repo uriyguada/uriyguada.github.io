@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reproductor de videocaso</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+button{font:inherit;cursor:pointer}
+.rp-mono{font-family:'Courier Prime',monospace}
+.rp-holes{height:30px;background:#0A0908 radial-gradient(circle,#0000 0,#0000 0);background-image:radial-gradient(ellipse 7px 5px at 50% 50%,rgba(238,230,211,0.32) 98%,#0000);background-size:26px 30px;background-position:center}
+</style>
+</helmet>
+<div style="width: 100%; font-family: 'Archivo Narrow', sans-serif; color: #EEE6D3">
+
+<sc-if value="{{vLinea}}" hint-placeholder-val="{{true}}">
+<div style="position: relative; aspect-ratio: 16 / 9; background: #0A0908; overflow: hidden">
+<img src="{{img}}" alt="{{alt}}" style="width: 100%; height: 100%; object-fit: cover; display: block">
+<div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,9,8,0.75) 0%, rgba(10,9,8,0) 30%)"></div>
+<sc-if value="{{pausa}}" hint-placeholder-val="{{true}}">
+<button type="button" onClick="{{toggle}}" aria-label="Reproducir videocaso" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 92px; height: 92px; border-radius: 50%; border: 0; background: #EEE6D3; display: flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="#1B1916"></path></svg></button>
+</sc-if>
+<div style="position: absolute; left: 36px; right: 36px; bottom: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: baseline" class="rp-mono">
+<span style="font-size: 13px; letter-spacing: 0.16em">FUNCIÓN {{n}} · {{titulo}}</span>
+<span style="font-size: 13px; letter-spacing: 0.08em">{{actual}} / {{dur}}</span>
+</div>
+<div style="position: relative; height: 2px; background: rgba(238,230,211,0.35)" role="slider" aria-label="Progreso del videocaso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{pct}}"><div style="width: {{pct}}%; height: 2px; background: {{color}}"></div></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{vTalon}}" hint-placeholder-val="{{false}}">
+<div style="-webkit-mask: radial-gradient(circle 11px at 0 calc(100% - 64px),#0000 98%,#000) left/51% 100% no-repeat, radial-gradient(circle 11px at 100% calc(100% - 64px),#0000 98%,#000) right/51% 100% no-repeat; mask: radial-gradient(circle 11px at 0 calc(100% - 64px),#0000 98%,#000) left/51% 100% no-repeat, radial-gradient(circle 11px at 100% calc(100% - 64px),#0000 98%,#000) right/51% 100% no-repeat">
+<div style="position: relative; aspect-ratio: 16 / 9; background: #0A0908; overflow: hidden">
+<img src="{{img}}" alt="{{alt}}" style="width: 100%; height: 100%; object-fit: cover; display: block">
+<sc-if value="{{pausa}}" hint-placeholder-val="{{true}}"><div style="position: absolute; inset: 0; background: rgba(10,9,8,0.18)"></div></sc-if>
+</div>
+<div style="height: 64px; background: #EEE6D3; border-top: 1.5px dashed #1B1916; display: flex; align-items: center; gap: 22px; padding: 0 30px; color: #1B1916">
+<button type="button" onClick="{{toggle}}" aria-label="{{toggleLabel}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{pausa}}" hint-placeholder-val="{{true}}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#1B1916"></path></svg></sc-if>
+<sc-if value="{{play}}" hint-placeholder-val="{{false}}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="#1B1916"></path></svg></sc-if>
+</button>
+<span class="rp-mono" style="flex: none; font-size: 12px; letter-spacing: 0.16em">FUNCIÓN {{n}}</span>
+<div style="flex: 1; height: 1.5px; background: rgba(27,25,22,0.25)" role="slider" aria-label="Progreso del videocaso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{pct}}"><div style="width: {{pct}}%; height: 1.5px; background: #1B1916"></div></div>
+<span class="rp-mono" style="flex: none; font-size: 12px">{{actual}} / {{dur}}</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{vSello}}" hint-placeholder-val="{{false}}">
+<div style="position: relative; aspect-ratio: 16 / 9; background: #0A0908; overflow: hidden">
+<img src="{{img}}" alt="{{alt}}" style="width: 100%; height: 100%; object-fit: cover; display: block">
+<sc-if value="{{pausa}}" hint-placeholder-val="{{true}}">
+<div style="position: absolute; inset: 0; background: rgba(10,9,8,0.4)"></div>
+<button type="button" onClick="{{toggle}}" aria-label="Reproducir videocaso" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 160px; height: 160px; border: 0; padding: 0; background: transparent">
+<svg width="160" height="160" viewBox="0 0 160 160" aria-hidden="true"><defs><path id="rp-s" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"></path></defs><circle cx="80" cy="80" r="78" fill="none" stroke="#EEE6D3" stroke-width="1.5"></circle><text font-family="Courier Prime" font-size="11" fill="#EEE6D3" letter-spacing="3.2"><textPath href="#rp-s">VER VIDEOCASO · VER VIDEOCASO · VER VIDEOCASO ·</textPath></text><circle cx="80" cy="80" r="44" fill="none" stroke="#EEE6D3" stroke-width="1.5"></circle><path d="M72 66 L94 80 L72 94 Z" fill="#EEE6D3"></path></svg>
+</button>
+</sc-if>
+<sc-if value="{{play}}" hint-placeholder-val="{{false}}">
+<div style="position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(238,230,211,0.25)"><div style="width: {{pct}}%; height: 3px; background: {{color}}"></div></div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{vFilmico}}" hint-placeholder-val="{{false}}">
+<div style="background: #0A0908">
+<div class="rp-holes"></div>
+<div style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; margin: 0 22px">
+<img src="{{img}}" alt="{{alt}}" style="width: 100%; height: 100%; object-fit: cover; display: block">
+<sc-if value="{{pausa}}" hint-placeholder-val="{{true}}">
+<button type="button" onClick="{{toggle}}" aria-label="Reproducir videocaso" class="rp-mono" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 0; border-radius: 40px; background: #EEE6D3; color: #1B1916; padding: 14px 26px; display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 700; letter-spacing: 0.16em"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l15 8-15 8z" fill="#1B1916"></path></svg>VER VIDEOCASO</button>
+</sc-if>
+</div>
+<div style="height: 30px; display: flex; align-items: center; gap: 18px; padding: 0 22px" class="rp-mono">
+<span style="font-size: 11px; letter-spacing: 0.16em; color: rgba(238,230,211,0.7)">{{n}}</span>
+<div style="flex: 1; height: 1.5px; background: rgba(238,230,211,0.25)"><div style="width: {{pct}}%; height: 1.5px; background: {{color}}"></div></div>
+<span style="font-size: 11px; color: rgba(238,230,211,0.7)">{{actual}} / {{dur}}</span>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"img":{"editor":null,"default":"/img/anda-pidiendo/poster-video.jpg"},"alt":{"editor":null,"default":"Fotograma del videocaso"},"color":{"editor":"color","default":"#EBA5B3","options":["#EBA5B3","#E99D25","#8EC8D2","#86AE76"]},"n":{"editor":null,"default":"01"},"titulo":{"editor":null,"default":"ANDÁ PIDIENDO"},"dur":{"editor":null,"default":"00:53"},"variante":{"editor":"enum","options":["linea","talon","sello","filmico"],"default":"linea"},"estado":{"editor":"enum","options":["pausa","play"],"default":"pausa"},"$preview":{"width":1280,"height":720}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { play: null }; }
+  renderVals() {
+    const base = (this.props.estado ?? 'pausa') === 'play';
+    const play = this.state.play === null ? base : this.state.play;
+    const v = this.props.variante ?? 'linea';
+    return {
+      img: this.props.img ?? '/img/anda-pidiendo/poster-video.jpg',
+      alt: this.props.alt ?? 'Fotograma del videocaso',
+      color: this.props.color ?? '#EBA5B3',
+      n: this.props.n ?? '01',
+      titulo: this.props.titulo ?? 'ANDÁ PIDIENDO',
+      dur: this.props.dur ?? '00:53',
+      vLinea: v === 'linea', vTalon: v === 'talon', vSello: v === 'sello', vFilmico: v === 'filmico',
+      pausa: !play, play,
+      pct: play ? 38 : 0,
+      actual: play ? '00:20' : '00:00',
+      toggleLabel: play ? 'Pausar' : 'Reproducir',
+      toggle: () => this.setState({ play: !play })
+    };
+  }
+}
+</script>
+</body>
+</html>

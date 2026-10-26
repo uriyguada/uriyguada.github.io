@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Uri &amp; Guada — Ficha mobile: Andá pidiendo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Advercase';src:url('/fonts/Advercase-Regular.otf') format('opentype');font-weight:400}
+@font-face{font-family:'Roycella';src:url('/fonts/Roycella.ttf') format('truetype')}
+body{margin:0}
+a{color:#1B1916;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.adv{font-family:'Advercase',Georgia,serif}
+.roy{font-family:'Roycella',cursive}
+.mono{font-family:'Courier Prime',monospace}
+.arch{font-family:'Archivo Narrow',sans-serif}
+.grain{position:absolute;inset:0;background-image:url('/textura/grano.png');pointer-events:none;mix-blend-mode:multiply;z-index:50}
+.duo{position:relative;overflow:hidden}
+.duo img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.25) brightness(1.08);mix-blend-mode:multiply}
+.notch{-webkit-mask:radial-gradient(circle 12px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 12px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.sprocket{height:22px;background:repeating-linear-gradient(90deg,#0000 0 8px,#EEE6D3 8px 20px,#0000 20px 28px);background-clip:content-box;padding:7px 0;box-sizing:border-box}
+.scroll-x{overflow-x:auto;scrollbar-width:none}
+.tab{flex:none;padding:14px 16px;font-weight:700;font-size:13px;letter-spacing:.1em;border-right:2px solid #1B1916}
+</style>
+</helmet>
+<div class="arch" style="position: relative; width: 390px; min-height: 3600px; background: #EEE6D3; color: #1B1916; overflow: hidden">
+<div class="grain" style="opacity: {{grano}}"></div>
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 2px solid #1B1916">
+<a href="CarteleraMobile.dc.html" aria-label="Volver a la cartelera" style="width: 44px; height: 44px; border: 2px solid #1B1916; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B1916" stroke-width="2.6" aria-hidden="true"><path d="M15 4l-8 8 8 8"></path></svg></a>
+<a href="HomeMobile.dc.html" class="roy" style="font-size: 30px; line-height: 1">Uri &amp; Guada</a>
+<button aria-label="Abrir menú" style="width: 44px; height: 44px; border: 2px solid #1B1916; background: transparent; display: flex; align-items: center; justify-content: center"><svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" fill="none" stroke="#1B1916" stroke-width="2.4"><path d="M0 1h20M0 7h20M0 13h20"></path></svg></button>
+</header>
+
+<section style="background: #BA0101; color: #F4E9D6; padding: 24px 16px 40px">
+<div class="mono" style="border: 2px solid #F4E9D6; border-radius: 30px; padding: 8px 14px; font-size: 11px; letter-spacing: 0.1em; text-align: center; line-height: 1.6">DIR. DE ARTE · URI BORITS<br>REDACCIÓN · GUADA ALONSO MONTEROS</div>
+<div style="text-align: center; font-size: 88px; font-weight: 700; line-height: 0.84; letter-spacing: -0.03em; margin-top: 18px">ANDÁ<br>PIDIENDO</div>
+<div class="mono" style="text-align: center; font-size: 15px; margin-top: 6px">una idea para PedidosYa</div>
+<div style="position: relative; margin-top: 28px">
+<div class="duo" style="height: 300px; border-radius: 28px; background: #F2D3BF; border: 3px solid #1B1916"><img src="/img/anda-pidiendo/hero-sillon.jpg" alt="Hombre dormido en el sillón esperando su pedido"></div>
+<div style="position: absolute; left: -8px; top: 20px; background: #EBA5B3; color: #1B1916; border: 2px solid #1B1916; border-radius: 8px; padding: 6px 12px; transform: rotate(-9deg); font-weight: 700; font-size: 15px">VÍA PÚBLICA</div>
+<div style="position: absolute; right: -10px; top: -22px; width: 92px; height: 92px; background: #EBC54C; border: 2px solid #1B1916; clip-path: polygon(50% 0%, 61% 18%, 82% 10%, 80% 32%, 100% 40%, 85% 56%, 98% 76%, 76% 78%, 70% 100%, 52% 86%, 34% 100%, 26% 80%, 4% 80%, 14% 60%, 0% 42%, 20% 32%, 16% 10%, 38% 18%); display: flex; align-items: center; justify-content: center; transform: rotate(8deg)"><span style="font-weight: 700; font-size: 13px; line-height: 0.95; text-align: center; color: #1B1916">LA MÁS<br>PEDIDA</span></div>
+<div style="position: absolute; left: -6px; bottom: 16px; width: 86px; height: 78px; background: #EBA5B3; border: 2px solid #1B1916; border-radius: 44px 44px 10px 44px; transform: rotate(-38deg); display: flex; align-items: center; justify-content: center"><span style="transform: rotate(38deg); font-weight: 700; font-size: 15px; color: #7A1229; line-height: 0.9; text-align: center">HAM<br>BRE</span></div>
+</div>
+<div class="mono" style="text-align: center; font-size: 14px; line-height: 1.5; font-weight: 700; margin-top: 30px">SI PEDÍS MIENTRAS VIAJÁS EN SUBTE, CUANDO LLEGÁS A TU CASA LA COMIDA YA TE ESTÁ ESPERANDO.</div>
+</section>
+
+<nav class="scroll-x" style="display: flex; border-bottom: 2px solid #1B1916" aria-label="Secciones de la ficha">
+<a href="#m-video" class="tab" style="background: #1B1916; color: #EEE6D3">VIDEOCASO</a>
+<a href="#m-board" class="tab">BOARD</a>
+<a href="#m-graficas" class="tab">GRÁFICAS</a>
+<a href="#m-resenas" class="tab">RESEÑAS</a>
+</nav>
+
+<section id="m-video" style="background: #141210; color: #EEE6D3; padding: 40px 16px 44px">
+<div class="adv" style="font-size: 54px; line-height: 0.85">Videocaso</div>
+<div style="position: relative; height: 202px; border: 2px solid #EEE6D3; margin-top: 20px; overflow: hidden">
+<img src="/img/anda-pidiendo/poster-video.jpg" alt="Fotograma del videocaso en el andén del subte" style="width: 100%; height: 100%; object-fit: cover; display: block">
+<button aria-label="Reproducir videocaso" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 68px; height: 68px; border-radius: 50%; background: #BA0101; border: 3px solid #EEE6D3; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="#EEE6D3" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg></button>
+</div>
+<div style="background: #0A0908; margin-top: 18px">
+<div class="sprocket"></div>
+<div class="scroll-x" style="display: flex; gap: 8px; padding: 0 8px">
+<img src="/img/anda-pidiendo/anden.jpg" alt="Andén" style="flex: none; width: 150px; height: 86px; object-fit: cover">
+<img src="/img/anda-pidiendo/mapa.jpg" alt="Mapa del pedido" style="flex: none; width: 150px; height: 86px; object-fit: cover">
+<img src="/img/anda-pidiendo/grafica-carabobo.jpg" alt="Gráfica Carabobo" style="flex: none; width: 150px; height: 86px; object-fit: cover">
+</div>
+<div class="sprocket"></div>
+</div>
+</section>
+
+<section id="m-board" style="background: #E2D7C0; padding: 40px 16px 44px">
+<div class="adv" style="font-size: 54px; line-height: 0.85">Board</div>
+<div style="background: #F6F1E6; border: 2px solid #1B1916; padding: 10px; margin-top: 20px; box-shadow: 6px 6px 0 #1B1916"><img src="/img/anda-pidiendo/board.jpg" alt="Board final de Andá pidiendo" style="display: block; width: 100%; height: 250px; object-fit: contain; background: #FFFFFF"></div>
+</section>
+
+<section id="m-graficas" style="background: #EBA5B3; padding: 40px 16px 44px">
+<div class="adv" style="font-size: 54px; line-height: 0.85; color: #4A0A18">Las piezas</div>
+<div style="border: 2px solid #1B1916; margin-top: 18px"><img src="/img/anda-pidiendo/graficas.jpg" alt="Gráficas de estación" style="display: block; width: 100%; height: 240px; object-fit: cover"></div>
+<div style="border: 2px solid #1B1916; margin-top: 12px"><img src="/img/anda-pidiendo/grafica-carabobo.jpg" alt="Gráfica de Carabobo en el andén" style="display: block; width: 100%; height: 200px; object-fit: cover"></div>
+</section>
+
+<section id="m-resenas" style="padding: 40px 16px 40px">
+<div class="adv" style="font-size: 54px; line-height: 0.85">Reseñas</div>
+<sc-for list="{{resenas}}" as="r" hint-placeholder-count="2">
+<article style="background: #F6EEDC; border: 2px solid #1B1916; padding: 18px; margin-top: 16px">
+<div style="display: flex; align-items: center; gap: 10px"><span style="width: 40px; height: 40px; border-radius: 50%; background: {{r.bg}}; border: 2px solid #1B1916; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px">{{r.ini}}</span><b style="font-size: 14px">{{r.user}}</b><span style="font-size: 16px; margin-left: auto">{{r.stars}}</span></div>
+<p style="margin: 10px 0 0; font-size: 19px; line-height: 1.3">{{r.txt}}</p>
+</article>
+</sc-for>
+<div style="display: flex; justify-content: center; margin-top: 22px" role="radiogroup" aria-label="Tu calificación">
+<sc-for list="{{picker}}" as="s" hint-placeholder-count="5"><button type="button" role="radio" aria-checked="{{s.on}}" aria-label="{{s.label}}" onClick="{{s.pick}}" style="background: transparent; border: 0; padding: 4px; font-size: 38px; line-height: 1; color: {{s.color}}">★</button></sc-for>
+</div>
+<label for="fm-rv" style="position: absolute; left: -9999px">Tu reseña</label>
+<input id="fm-rv" type="text" placeholder="Escribí tu reseña" style="width: 100%; box-sizing: border-box; border: 2px solid #1B1916; background: #F6EEDC; padding: 14px; font-size: 16px; font-family: inherit; margin-top: 10px">
+<button type="button" class="notch" style="width: 100%; background: #1B1916; color: #EEE6D3; border: 0; padding: 16px; margin-top: 10px; font-weight: 700; font-size: 14px; letter-spacing: 0.12em">PUBLICAR</button>
+</section>
+
+<section style="padding: 0 16px 44px">
+<div class="mono" style="font-size: 11px; letter-spacing: 0.16em; margin-bottom: 12px">PRÓXIMA FUNCIÓN ——</div>
+<a href="FichaMobile.dc.html" class="notch" style="display: flex; background: #8EC8D2; color: #0F4C57">
+<div style="flex: 1; padding: 20px 22px"><div class="mono" style="font-size: 10px">FUNCIÓN 02 · EL OJO</div><div style="font-size: 44px; font-weight: 700; line-height: 0.88; margin-top: 4px">MUCHA MERD</div></div>
+<div style="width: 80px; border-left: 3px dashed #0F4C57; background: #F6EEDC; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px">VER →</div>
+</a>
+</section>
+<footer class="mono" style="background: #1B1916; color: #B9AF9C; padding: 22px 16px; font-size: 10px; letter-spacing: 0.12em; text-align: center">© URI &amp; GUADA</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"grano":{"editor":"range","min":0,"max":1,"step":0.05,"default":0.8,"section":"Textura"},"$preview":{"width":390,"height":3600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { rating: 0 }; }
+  renderVals() {
+    const picker = [1, 2, 3, 4, 5].map((n) => ({
+      on: this.state.rating === n ? 'true' : 'false',
+      label: n + (n === 1 ? ' estrella' : ' estrellas'),
+      color: n <= this.state.rating ? '#E99D25' : '#B9AF9C',
+      pick: () => this.setState({ rating: n })
+    }));
+    return {
+      grano: this.props.grano ?? 0.8,
+      picker,
+      resenas: [
+        { ini: 'MS', bg: '#EBA5B3', user: 'mica.subte', stars: '★★★★★', txt: 'llegué a casa y la milanesa me estaba esperando en la puerta. ni mi familia hace eso.' },
+        { ini: 'JP', bg: '#E99D25', user: 'juanchi_planning', stars: '★★★★½', txt: 'primera vez en la historia que la línea A y el delivery llegan a horario el mismo día.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

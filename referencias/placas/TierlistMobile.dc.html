@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Uri &amp; Guada — Tierlist mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Roycella';src:url('/fonts/Roycella.ttf') format('truetype')}
+body{margin:0}
+a{color:#1B1916;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.roy{font-family:'Roycella',cursive}
+.mono{font-family:'Courier Prime',monospace}
+.arch{font-family:'Archivo Narrow',sans-serif}
+.grain{position:absolute;inset:0;background-image:url('/textura/grano.png');pointer-events:none;mix-blend-mode:multiply;z-index:50}
+.duo img{filter:grayscale(1) contrast(1.25) brightness(1.08);mix-blend-mode:multiply}
+.notch{-webkit-mask:radial-gradient(circle 12px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 12px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+</style>
+</helmet>
+<div class="arch" style="position: relative; width: 390px; min-height: 1290px; background: #EEE6D3; color: #1B1916; overflow: hidden">
+<div class="grain" style="opacity: {{grano}}"></div>
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 2px solid #1B1916">
+<a href="HomeMobile.dc.html" class="roy" style="font-size: 32px; line-height: 1">Uri &amp; Guada</a>
+<button aria-label="Abrir menú" style="width: 44px; height: 44px; border: 2px solid #1B1916; background: transparent; display: flex; align-items: center; justify-content: center"><svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" fill="none" stroke="#1B1916" stroke-width="2.4"><path d="M0 1h20M0 7h20M0 13h20"></path></svg></button>
+</header>
+<section style="padding: 34px 16px 20px">
+<div style="font-size: 90px; font-weight: 700; line-height: 0.8; letter-spacing: -0.03em">TIERLIST</div>
+</section>
+<section style="padding: 0 16px">
+<div style="border: 2px solid #1B1916; background: #1B1916; display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{tiers}}" as="t" hint-placeholder-count="7">
+<div style="display: flex; min-height: 100px; background: #26221E">
+<button type="button" onClick="{{t.place}}" aria-label="Poner la idea elegida en {{t.label}}" style="flex: none; width: 84px; border: 0; background: {{t.color}}; color: #1B1916; font-weight: 700; font-size: 14px; line-height: 1; text-transform: uppercase; padding: 0 6px">{{t.label}}</button>
+<div style="flex: 1; display: flex; flex-wrap: wrap; gap: 6px; padding: 6px; align-items: center">
+<sc-for list="{{t.items}}" as="i" hint-placeholder-count="1">
+<button type="button" onClick="{{i.pick}}" aria-pressed="{{i.sel}}" aria-label="{{i.titulo}}" style="width: 70px; height: 88px; padding: 0; border: 0; background: {{i.color}}; display: flex; flex-direction: column; outline: {{i.ring}}; outline-offset: 2px">
+<span class="{{i.frame}}" style="display: block; width: 100%; height: 56px; background: {{i.bg}}; overflow: hidden"><img src="{{i.img}}" alt="" style="width: 100%; height: 100%; object-fit: {{i.fit}}; display: block"></span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 3px; font-weight: 700; font-size: 9px; line-height: 1; color: {{i.dark}}">{{i.titulo}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+<section style="padding: 24px 16px 30px">
+<div class="mono" style="font-size: 11px; letter-spacing: 0.14em; margin-bottom: 10px">EN CARTEL</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; border: 2px dashed #1B1916; padding: 10px; min-height: 100px">
+<sc-for list="{{pool}}" as="i" hint-placeholder-count="4">
+<button type="button" onClick="{{i.pick}}" aria-pressed="{{i.sel}}" aria-label="{{i.titulo}}" style="width: 70px; height: 88px; padding: 0; border: 0; background: {{i.color}}; display: flex; flex-direction: column; outline: {{i.ring}}; outline-offset: 2px">
+<span class="{{i.frame}}" style="display: block; width: 100%; height: 56px; background: {{i.bg}}; overflow: hidden"><img src="{{i.img}}" alt="" style="width: 100%; height: 100%; object-fit: {{i.fit}}; display: block"></span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 3px; font-weight: 700; font-size: 9px; line-height: 1; color: {{i.dark}}">{{i.titulo}}</span>
+</button>
+</sc-for>
+</div>
+<div style="display: flex; gap: 8px; margin-top: 18px">
+<button type="button" onClick="{{reset}}" style="flex: 1; border: 2px solid #1B1916; background: transparent; padding: 14px 0; font-weight: 700; font-size: 13px; letter-spacing: 0.1em">REINICIAR</button>
+<button type="button" class="notch" style="flex: 2; border: 0; background: #1B1916; color: #EEE6D3; padding: 16px 0; font-weight: 700; font-size: 13px; letter-spacing: 0.1em">DESCARGAR ↓</button>
+</div>
+</section>
+<footer class="mono" style="background: #1B1916; color: #B9AF9C; padding: 22px 16px; font-size: 10px; letter-spacing: 0.12em; text-align: center">© URI &amp; GUADA</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"grano":{"editor":"range","min":0,"max":1,"step":0.05,"default":0.8,"section":"Textura"},"$preview":{"width":390,"height":1290}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { place: { mm: 0, lp: 0, ap: 1, ks: 2 }, sel: 'sp' };
+  }
+  renderVals() {
+    const ideas = [
+      { id: 'ap', titulo: 'ANDÁ PIDIENDO', color: '#EBA5B3', dark: '#7A1229', img: '/img/anda-pidiendo/hero-sillon.jpg', frame: 'duo', bg: '#EBA5B3', fit: 'cover' },
+      { id: 'mm', titulo: 'MUCHA MERD', color: '#8EC8D2', dark: '#0F4C57', img: '/img/mucha-merd/logo-vertical.jpg', frame: 'duo', bg: '#8EC8D2', fit: 'cover' },
+      { id: 'lp', titulo: 'LA P#%! QUE TE PARIÓ', color: '#E2662C', dark: '#3E1303', img: '/img/lpqtp/hero-soldado.jpg', frame: 'duo', bg: '#E2662C', fit: 'cover' },
+      { id: 'sp', titulo: 'SPOTIFUCK', color: '#86AE76', dark: '#1E3B16', img: '/img/spotifuck/hero-cama.jpg', frame: 'duo', bg: '#86AE76', fit: 'cover' },
+      { id: 'nb', titulo: 'NO ME BAÑO', color: '#8FA8CF', dark: '#1C2D4F', img: '/img/no-me-bano/mural.jpg', frame: 'duo', bg: '#8FA8CF', fit: 'cover' },
+      { id: 'ks', titulo: 'KAMASUTRA', color: '#D8C7A2', dark: '#6E0000', img: '/img/kamasutra/grafica-eeuu-china.jpg', frame: 'duo', bg: '#D8C7A2', fit: 'cover' },
+      { id: 'jw', titulo: 'CÓD1GOS D3 R3UN10N', color: '#EBC54C', dark: '#1F3A8A', img: '/img/codigos/key-visual.jpg', frame: 'duo', bg: '#EBC54C', fit: 'cover' },
+      { id: 'cl', titulo: 'CLARI', color: '#BBA7D8', dark: '#3B2563', img: '/img/clari/ticket.jpg', frame: 'duo', bg: '#BBA7D8', fit: 'cover' }
+    ];
+    const place = this.state.place, sel = this.state.sel;
+    const deco = (it) => Object.assign({}, it, {
+      sel: sel === it.id ? 'true' : 'false',
+      ring: sel === it.id ? '3px solid #E99D25' : '0 solid transparent',
+      pick: () => this.setState({ sel: sel === it.id ? null : it.id })
+    });
+    const defs = [
+      { label: 'Obra maestra', color: '#E98A84' }, { label: 'Cine', color: '#F0B27C' },
+      { label: 'Está bien', color: '#F1D27A' }, { label: 'Me dormí', color: '#B8DA86' },
+      { label: 'Mucha merd', color: '#A39BE6' }
+    ];
+    const tiers = defs.map((d, k) => Object.assign({}, d, {
+      items: ideas.filter((it) => place[it.id] === k).map(deco),
+      place: () => { if (!this.state.sel) return; const p = Object.assign({}, this.state.place); p[this.state.sel] = k; this.setState({ place: p, sel: null }); }
+    }));
+    return { grano: this.props.grano ?? 0.8, tiers, pool: ideas.filter((it) => place[it.id] === undefined).map(deco), reset: () => this.setState({ place: {}, sel: null }) };
+  }
+}
+</script>
+</body>
+</html>

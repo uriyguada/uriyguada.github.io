@@ -1,0 +1,6 @@
+node_modules
+dist
+.DS_Store
+
+# copia suelta de la foto de Guada (queda guada.png)
+public/img/dupla/603b6f92-677a-4ceb-8ce7-b3e56bc2b938.png

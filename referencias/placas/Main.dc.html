@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Uri &amp; Guada — Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Advercase';src:url('/fonts/Advercase-Regular.otf') format('opentype');font-weight:400;font-style:normal}
+@font-face{font-family:'Advercase';src:url('/fonts/Advercase-Bold.otf') format('opentype');font-weight:700;font-style:normal}
+@font-face{font-family:'Roycella';src:url('/fonts/Roycella.ttf') format('truetype')}
+body{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.adv{font-family:'Advercase',Georgia,serif}
+.roy{font-family:'Roycella',cursive;font-weight:400}
+.mono{font-family:'Courier Prime',monospace}
+.arch{font-family:'Archivo Narrow',sans-serif}
+.grain{position:absolute;inset:0;background-image:url('/textura/grano.png');pointer-events:none;mix-blend-mode:multiply;z-index:50}
+.duo{position:relative;overflow:hidden}
+.duo img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.25) brightness(1.08);mix-blend-mode:multiply}
+.notch{-webkit-mask:radial-gradient(circle 16px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 16px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.nl{-webkit-mask:radial-gradient(circle 16px at 0 50%,#0000 98%,#000);mask:radial-gradient(circle 16px at 0 50%,#0000 98%,#000)}
+.nr{-webkit-mask:radial-gradient(circle 16px at 100% 50%,#0000 98%,#000);mask:radial-gradient(circle 16px at 100% 50%,#0000 98%,#000)}
+.barcode{background:repeating-linear-gradient(90deg,currentColor 0 2px,#0000 2px 4px,currentColor 4px 5px,#0000 5px 9px,currentColor 9px 12px,#0000 12px 14px)}
+.vert{writing-mode:vertical-rl;transform:rotate(180deg)}
+.mini{-webkit-mask:radial-gradient(circle 8px at 0 70%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 70%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 8px at 0 70%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 70%,#0000 98%,#000) right/51% 100% no-repeat}
+.tk{display:flex;position:relative;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.tk:hover{transform:translateY(-6px) rotate(0deg) !important}
+.tk .body,.tk .stub{filter:drop-shadow(0 14px 18px rgba(27,25,22,.18))}
+.torn .body{animation:bodyOpen 1.15s cubic-bezier(.3,.7,.2,1) forwards}
+.torn .stub{animation:stubFall 1.15s cubic-bezier(.4,.1,.6,1) forwards}
+@keyframes stubFall{0%{transform:none}18%{transform:translate(6px,-2px) rotate(-2deg)}40%{transform:translate(22px,10px) rotate(8deg)}100%{transform:translate(70px,260px) rotate(32deg);opacity:0}}
+@keyframes bodyOpen{0%{transform:none}18%{transform:translate(-4px,1px) rotate(1deg)}45%{transform:translate(-8px,-6px) rotate(-1.5deg) scale(1.01)}100%{transform:translate(0,-30px) scale(1.12);opacity:0}}
+.rip-b{position:absolute;top:0;bottom:0;right:-1px;width:9px;background:linear-gradient(135deg,#F6EEDC 25%,#0000 25%) 0 0/9px 9px,linear-gradient(45deg,#F6EEDC 25%,#0000 25%) 0 0/9px 9px;opacity:0;transition:opacity .1s .15s}
+.torn .rip-b{opacity:1}
+</style>
+</helmet>
+<div class="arch" style="position: relative; width: 1440px; min-height: 4900px; background: #EEE6D3; color: #1B1916; overflow: hidden">
+<div class="grain" style="opacity: {{grano}}"></div>
+
+<section style="position: relative; background: #141210; color: #EEE6D3; padding: 0 80px 90px">
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 26px 0 30px">
+<nav style="display: flex; gap: 40px; font-size: 16px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase">
+<a href="#cartelera">Cartelera</a>
+<a href="#tierlist">Tierlist</a>
+</nav>
+<a href="#entrada" class="notch" style="background: #BA0101; color: #EEE6D3; padding: 15px 32px; font-weight: 700; letter-spacing: 0.14em; font-size: 14px">SACÁ TU ENTRADA</a>
+</header>
+<div style="position: relative; width: 1280px; height: 780px">
+<div class="duo nl" style="position: absolute; left: 0; top: 0; width: 640px; height: 780px; background: #EBA5B3; border-radius: 22px 0 0 22px; -webkit-mask: radial-gradient(circle 34px at 0 50%,#0000 98%,#000); mask: radial-gradient(circle 34px at 0 50%,#0000 98%,#000)"><img src="/img/dupla/uri.jpg" alt="Uri de espaldas en la sala, mirando la pantalla" style="object-position: 40% 50%"></div>
+<div class="duo nr" style="position: absolute; left: 640px; top: 0; width: 640px; height: 780px; background: #8EC8D2; border-radius: 0 22px 22px 0; -webkit-mask: radial-gradient(circle 34px at 100% 50%,#0000 98%,#000); mask: radial-gradient(circle 34px at 100% 50%,#0000 98%,#000)"><img src="/img/dupla/guada.jpg" alt="Guada de espaldas en la sala, con pochoclos y gaseosa" style="object-position: 50% 60%"></div>
+<div style="position: absolute; left: 638px; top: 30px; bottom: 30px; border-left: 4px dashed #141210"></div>
+<div style="position: absolute; left: 618px; top: -22px; width: 44px; height: 44px; border-radius: 50%; background: #141210"></div>
+<div style="position: absolute; left: 618px; bottom: -22px; width: 44px; height: 44px; border-radius: 50%; background: #141210"></div>
+<h1 class="roy" style="position: absolute; left: 0; right: 0; bottom: -40px; margin: 0; display: flex; justify-content: center; align-items: baseline; line-height: 1; font-weight: 400; pointer-events: none">
+<span style="font-size: 250px; color: #EEE6D3; margin-right: -30px; text-shadow: 0 6px 30px rgba(0,0,0,0.35)">Uri</span>
+<span style="font-size: 430px; color: #BA0101; margin: 0 -10px; position: relative; top: 40px">&amp;</span>
+<span style="font-size: 250px; color: #EEE6D3; margin-left: -40px; text-shadow: 0 6px 30px rgba(0,0,0,0.35)">Guada</span>
+</h1>
+</div>
+<div style="display: flex; align-items: center; gap: 28px; justify-content: center; margin-top: 90px; font-weight: 700; font-size: 30px; letter-spacing: 0.42em"><span style="width: 120px; height: 2px; background: #EEE6D3"></span>DUPLA CREATIVA<span style="width: 120px; height: 2px; background: #EEE6D3"></span></div>
+</section>
+
+<section id="cartelera" style="padding: 110px 80px 120px">
+<h2 class="adv" style="margin: 0; font-weight: 400; font-size: 200px; line-height: 0.8; letter-spacing: -0.02em; border-bottom: 2px solid #1B1916; padding-bottom: 36px">Cartelera</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px 56px; margin-top: 72px">
+<sc-for list="{{entradas}}" as="t" hint-placeholder-count="8">
+<button type="button" onClick="{{t.tear}}" class="tk {{t.cls}}" aria-label="Abrir {{t.titulo}}" style="height: 312px; padding: 0; border: 0; background: transparent; text-align: left; transform: rotate({{t.rot}}deg); color: {{t.dark}}">
+<div class="body nl" style="flex: 1; display: flex; position: relative">
+<div style="flex: 1; background: {{t.color}}; display: flex; gap: 26px; padding: 24px 24px 24px 36px">
+<div class="duo" style="flex: none; width: 210px; height: 264px; background: {{t.color}}; border: 6px solid #F6EEDC; box-sizing: border-box"><img src="{{t.img}}" alt="" style="object-position: {{t.pos}}"></div>
+<div style="display: flex; flex-direction: column; flex: 1; min-width: 0">
+<div class="mono" style="display: flex; justify-content: space-between; font-size: 13px; letter-spacing: 0.1em"><span>FUNCIÓN {{t.n}}</span><span>{{t.marca}}</span></div>
+<div style="height: 2px; background: {{t.dark}}; margin-top: 10px"></div>
+<div style="font-size: 58px; font-weight: 700; line-height: 0.88; letter-spacing: -0.01em; margin-top: auto">{{t.titulo}}</div>
+</div>
+</div>
+<span class="rip-b"></span>
+</div>
+<div class="stub nr" style="width: 104px; display: flex">
+<div style="flex: 1; background: #F6EEDC; border-left: 3px dashed {{t.dark}}; display: flex; flex-direction: column; align-items: center; padding: 22px 0; gap: 14px">
+<div class="adv vert" style="font-size: 26px; flex: 1; white-space: nowrap">Uri &amp; Guada</div>
+<div class="barcode" style="width: 56px; height: 34px"></div>
+</div>
+</div>
+</button>
+</sc-for>
+</div>
+</section>
+
+<section id="entrada" style="background: #141210; padding: 110px 80px 120px">
+<div style="display: flex; color: #1B1916">
+<div class="nl" style="flex: 1; background: #EEE6D3; padding: 56px 70px 60px; display: flex; flex-direction: column">
+<h2 style="margin: 0; font-size: 150px; font-weight: 700; line-height: 0.82; letter-spacing: -0.02em">SACÁ TU ENTRADA</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin-top: 56px; border-top: 2px solid #1B1916">
+<sc-for list="{{personas}}" as="p" hint-placeholder-count="2">
+<div style="padding: 28px 40px 0 0; border-right: {{p.sep}}; padding-left: {{p.pl}}">
+<div class="roy" style="font-size: 96px; line-height: 0.9; color: {{p.tinta}}">{{p.nombre}}</div>
+<div class="mono" style="display: flex; flex-direction: column; gap: 14px; margin-top: 22px; font-size: 13px; letter-spacing: 0.12em">
+<a href="{{p.mailHref}}" style="display: flex; gap: 18px; align-items: baseline"><span style="width: 92px; color: #5A5246">MAIL</span><span style="font-size: 19px; font-weight: 700; letter-spacing: 0.02em">{{p.mail}}</span></a>
+<a href="{{p.telHref}}" style="display: flex; gap: 18px; align-items: baseline"><span style="width: 92px; color: #5A5246">WHATSAPP</span><span style="font-size: 19px; font-weight: 700; letter-spacing: 0.02em">{{p.tel}}</span></a>
+<a href="{{p.inHref}}" style="display: flex; gap: 18px; align-items: baseline"><span style="width: 92px; color: #5A5246">LINKEDIN</span><span style="font-size: 19px; font-weight: 700; letter-spacing: 0.02em">{{p.inTxt}} ↗</span></a>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+<div class="nr" style="width: 210px; background: #BA0101; color: #EEE6D3; border-left: 4px dashed #141210; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 44px 0">
+<div class="roy vert" style="font-size: 60px; white-space: nowrap">Uri &amp; Guada</div>
+<div class="barcode" style="width: 110px; height: 60px"></div>
+</div>
+</div>
+</section>
+
+<section id="tierlist" style="padding: 110px 80px 120px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end">
+<h2 style="margin: 0; font-size: 190px; font-weight: 700; line-height: 0.8; letter-spacing: -0.03em">TIERLIST</h2>
+<div style="display: flex; gap: 12px">
+<button type="button" onClick="{{reset}}" style="border: 2px solid #1B1916; background: transparent; padding: 16px 24px; font-weight: 700; font-size: 14px; letter-spacing: 0.12em">REINICIAR</button>
+<button type="button" class="notch" style="border: 0; background: #1B1916; color: #EEE6D3; padding: 18px 34px; font-weight: 700; font-size: 14px; letter-spacing: 0.12em">DESCARGAR MI TIERLIST ↓</button>
+</div>
+</div>
+<div style="border: 3px solid #1B1916; background: #1B1916; display: flex; flex-direction: column; gap: 3px; margin-top: 50px">
+<sc-for list="{{tiers}}" as="t" hint-placeholder-count="5">
+<div style="display: flex; min-height: 176px; background: #26221E">
+<button type="button" onClick="{{t.place}}" aria-label="Poner la idea elegida en {{t.label}}" style="flex: none; width: 190px; border: 0; background: {{t.color}}; color: #1B1916; font-weight: 700; font-size: 24px; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; padding: 0 14px">{{t.label}}</button>
+<div style="flex: 1; display: flex; flex-wrap: wrap; gap: 12px; padding: 12px; align-items: center">
+<sc-for list="{{t.items}}" as="i" hint-placeholder-count="2">
+<button type="button" onClick="{{i.pick}}" aria-pressed="{{i.sel}}" aria-label="{{i.titulo}}" class="mini" style="width: 128px; height: 152px; padding: 0; border: 0; background: {{i.color}}; display: flex; flex-direction: column; outline: {{i.ring}}; outline-offset: 3px">
+<span class="duo" style="display: block; width: 100%; height: 100px; background: {{i.color}}"><img src="{{i.img}}" alt=""></span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 6px; font-weight: 700; font-size: 15px; line-height: 1; color: {{i.dark}}; border-top: 2px dashed {{i.dark}}">{{i.titulo}}</span>
+</button>
+</sc-for>
+<button type="button" onClick="{{t.place}}" aria-label="Soltar acá" style="width: 128px; height: 152px; border: 2px dashed {{t.hint}}; background: transparent; color: {{t.hint}}; font-weight: 700; font-size: 28px">+</button>
+</div>
+</div>
+</sc-for>
+</div>
+<div class="mono" style="font-size: 13px; letter-spacing: 0.16em; margin: 34px 0 14px">EN CARTEL</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; min-height: 176px; border: 3px dashed #1B1916; padding: 12px; align-items: center">
+<sc-for list="{{pool}}" as="i" hint-placeholder-count="4">
+<button type="button" onClick="{{i.pick}}" aria-pressed="{{i.sel}}" aria-label="{{i.titulo}}" class="mini" style="width: 128px; height: 152px; padding: 0; border: 0; background: {{i.color}}; display: flex; flex-direction: column; outline: {{i.ring}}; outline-offset: 3px; transform: {{i.lift}}">
+<span class="duo" style="display: block; width: 100%; height: 100px; background: {{i.color}}"><img src="{{i.img}}" alt=""></span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 6px; font-weight: 700; font-size: 15px; line-height: 1; color: {{i.dark}}; border-top: 2px dashed {{i.dark}}">{{i.titulo}}</span>
+</button>
+</sc-for>
+</div>
+</section>
+
+<footer class="mono" style="background: #1B1916; color: #B9AF9C; padding: 28px 80px; font-size: 12px; letter-spacing: 0.14em">© URI &amp; GUADA</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"grano":{"editor":"range","min":0,"max":1,"step":0.05,"default":0.15,"section":"Textura"},"sonido":{"editor":"toggle","default":true,"section":"Rotura"},"$preview":{"width":1440,"height":4900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { torn: null, place: { mm: 0, lp: 0, ap: 1, ks: 2 }, sel: 'sp' };
+  }
+  tear(id) {
+    if (this.state.torn) return;
+    if (this.props.sonido !== false) {
+      try {
+        const s = ['/sound/ticket-rotura.webm', '/sound/ticket-rotura-2.webm', '/sound/ticket-rotura-3.webm'];
+        const a = new Audio(s[Math.floor(Math.random() * s.length)]);
+        a.volume = 0.8; a.playbackRate = 0.92 + Math.random() * 0.16; a.play().catch(() => {});
+      } catch (e) {}
+    }
+    this.setState({ torn: id });
+    setTimeout(() => this.setState({ torn: null }), 1700);
+  }
+  renderVals() {
+    const ideas = [
+      { id: 'ap', n: '01', titulo: 'ANDÁ PIDIENDO', marca: 'PEDIDOSYA', color: '#EBA5B3', dark: '#7A1229', img: '/img/anda-pidiendo/hero-sillon.jpg', pos: '50% 30%', rot: -1 },
+      { id: 'mm', n: '02', titulo: 'MUCHA MERD', marca: 'EL OJO', color: '#8EC8D2', dark: '#0F4C57', img: '/img/mucha-merd/logo-vertical.jpg', pos: '50% 60%', rot: 1 },
+      { id: 'lp', n: '03', titulo: 'LA P#%! QUE TE PARIÓ', marca: 'AMNISTÍA INTERNACIONAL', color: '#E2662C', dark: '#3E1303', img: '/img/lpqtp/hero-soldado.jpg', pos: '50% 40%', rot: 1 },
+      { id: 'sp', n: '04', titulo: 'SPOTIFUCK', marca: 'SPOTIFY', color: '#86AE76', dark: '#1E3B16', img: '/img/spotifuck/hero-cama.jpg', pos: '50% 40%', rot: -1 },
+      { id: 'nb', n: '05', titulo: 'NO ME BAÑO', marca: 'DOVE MEN+CARE', color: '#8FA8CF', dark: '#1C2D4F', img: '/img/no-me-bano/mural.jpg', pos: '50% 50%', rot: -1 },
+      { id: 'ks', n: '06', titulo: 'KAMASUTRA', marca: 'CENITAL', color: '#D8C7A2', dark: '#6E0000', img: '/img/kamasutra/grafica-eeuu-china.jpg', pos: '50% 40%', rot: 1 },
+      { id: 'jw', n: '07', titulo: 'CÓD1GOS D3 R3UN10N', marca: 'JOHNNIE WALKER', color: '#EBC54C', dark: '#1F3A8A', img: '/img/codigos/key-visual.jpg', pos: '80% 50%', rot: 1 },
+      { id: 'cl', n: '08', titulo: 'CLARI', marca: '★', color: '#BBA7D8', dark: '#3B2563', img: '/img/clari/ticket.jpg', pos: '50% 50%', rot: -1 }
+    ];
+    const entradas = ideas.map((t) => Object.assign({}, t, {
+      cls: this.state.torn === t.id ? 'torn' : '',
+      tear: () => this.tear(t.id)
+    }));
+    const personas = [
+      { nombre: 'Uri', tinta: '#7A1229', mail: 'uborits@gmail.com', mailHref: 'mailto:uborits@gmail.com', tel: '+54 9 11 6543-4316', telHref: 'https://wa.me/5491165434316', inTxt: '/in/uriborits', inHref: 'https://www.linkedin.com/in/uriborits/', sep: '2px dashed #1B1916', pl: '0px' },
+      { nombre: 'Guada', tinta: '#0F4C57', mail: 'guadaalonsom@gmail.com', mailHref: 'mailto:guadaalonsom@gmail.com', tel: '+54 9 381 333-6632', telHref: 'https://wa.me/5493813336632', inTxt: '/in/guadalupe-alonso-monteros', inHref: 'https://www.linkedin.com/in/guadalupe-alonso-monteros-a10521319/', sep: '0', pl: '44px' }
+    ];
+    const place = this.state.place;
+    const sel = this.state.sel;
+    const deco = (it) => Object.assign({}, it, {
+      sel: sel === it.id ? 'true' : 'false',
+      ring: sel === it.id ? '4px solid #E99D25' : '0 solid transparent',
+      lift: sel === it.id ? 'translateY(-6px)' : 'none',
+      pick: () => this.setState({ sel: sel === it.id ? null : it.id })
+    });
+    const defs = [
+      { label: 'Obra maestra', color: '#E98A84' },
+      { label: 'Cine', color: '#F0B27C' },
+      { label: 'Está bien', color: '#F1D27A' },
+      { label: 'Me dormí', color: '#B8DA86' },
+      { label: 'Mucha merd', color: '#A39BE6' }
+    ];
+    const tiers = defs.map((d, k) => Object.assign({}, d, {
+      hint: sel ? '#E99D25' : '#4A443B',
+      items: ideas.filter((it) => place[it.id] === k).map(deco),
+      place: () => {
+        if (!this.state.sel) return;
+        const p = Object.assign({}, this.state.place); p[this.state.sel] = k;
+        this.setState({ place: p, sel: null });
+      }
+    }));
+    return {
+      grano: this.props.grano ?? 0.15,
+      entradas, personas, tiers,
+      pool: ideas.filter((it) => place[it.id] === undefined).map(deco),
+      reset: () => this.setState({ place: {}, sel: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

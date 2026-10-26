@@ -1,0 +1,492 @@
+/* ---- hero de la ficha ---- */
+.ficha__hero {
+  position: relative;
+  background: var(--heroBg);
+  color: #f4e9d6;
+  padding: max(18px, calc(46px * var(--esc, 1))) max(16px, calc(70px * var(--esc, 1))) max(32px, calc(90px * var(--esc, 1)));
+}
+
+.ficha__meta {
+  display: flex;
+  align-items: center;
+  gap: max(8px, calc(18px * var(--esc, 1)));
+  font-size: max(9px, calc(13px * var(--esc, 1)));
+  letter-spacing: 0.16em;
+}
+
+.ficha__meta i {
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+}
+
+.ficha__creditos {
+  display: flex;
+  justify-content: center;
+  gap: max(10px, calc(70px * var(--esc, 1)));
+  flex-wrap: wrap;
+  border: 2px solid currentColor;
+  border-radius: 40px;
+  padding: max(7px, calc(12px * var(--esc, 1))) max(12px, calc(30px * var(--esc, 1)));
+  margin: max(14px, calc(38px * var(--esc, 1))) auto 0;
+  width: fit-content;
+  max-width: 100%;
+  font-size: max(9px, calc(15px * var(--esc, 1)));
+  letter-spacing: 0.14em;
+  text-align: center;
+}
+
+.ficha__titulo {
+  text-align: center;
+  font-size: calc(var(--fs-titulo, 170px) * var(--esc, 1));
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  margin-top: max(10px, calc(26px * var(--esc, 1)));
+}
+
+.ficha__para {
+  text-align: center;
+  font-size: max(11px, calc(22px * var(--esc, 1)));
+  margin: 8px 0 0;
+}
+
+.ficha__marco {
+  position: relative;
+  width: 100%;
+  margin: max(34px, calc(70px * var(--esc, 1))) auto 0;
+}
+
+.ficha__foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1120 / 600;
+  border-radius: max(14px, calc(46px * var(--esc, 1)));
+  border: 3px solid var(--tinta);
+  background: #f2d3bf;
+}
+
+.ficha__logline {
+  text-align: center;
+  font-size: max(12px, calc(22px * var(--esc, 1)));
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  max-width: 1000px;
+  margin: max(30px, calc(80px * var(--esc, 1))) auto 0;
+}
+
+/* ---- pegatinas ---- */
+.pegatina {
+  position: absolute;
+  z-index: 2;
+  color: var(--tinta);
+  font-weight: 700;
+}
+
+.s1 {
+  left: calc(-34px * var(--esc, 1));
+  top: calc(-28px * var(--esc, 1));
+  transform: rotate(-6deg);
+  border: 3px solid var(--tinta);
+  border-radius: 12px;
+  padding: max(5px, calc(12px * var(--esc, 1))) max(10px, calc(24px * var(--esc, 1)));
+  font-size: max(10px, calc(26px * var(--esc, 1)));
+  letter-spacing: 0.02em;
+}
+
+.s2 {
+  right: calc(-70px * var(--esc, 1));
+  top: calc(-70px * var(--esc, 1));
+  width: max(70px, calc(180px * var(--esc, 1)));
+  height: max(70px, calc(180px * var(--esc, 1)));
+  transform: rotate(12deg);
+}
+
+.s3 {
+  right: calc(-66px * var(--esc, 1));
+  bottom: calc(-66px * var(--esc, 1));
+  width: max(66px, calc(170px * var(--esc, 1)));
+  height: max(66px, calc(170px * var(--esc, 1)));
+  border: 3px solid var(--tinta);
+  clip-path: polygon(50% 0%, 61% 18%, 82% 10%, 80% 32%, 100% 40%, 85% 56%, 98% 76%, 76% 78%, 70% 100%, 52% 86%, 34% 100%, 26% 80%, 4% 80%, 14% 60%, 0% 42%, 20% 32%, 16% 10%, 38% 18%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(8deg);
+  font-size: max(9px, calc(23px * var(--esc, 1)));
+  line-height: 0.95;
+  text-align: center;
+}
+
+.s4 {
+  left: calc(-24px * var(--esc, 1));
+  bottom: calc(-20px * var(--esc, 1));
+  transform: rotate(-4deg);
+  border: 3px solid var(--tinta);
+  padding: max(4px, calc(10px * var(--esc, 1))) max(12px, calc(26px * var(--esc, 1)));
+  font-size: max(9px, calc(19px * var(--esc, 1)));
+  letter-spacing: 0.06em;
+  clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0 50%);
+}
+
+/* ---- pestañas ---- */
+.ficha__pestanas {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 2px solid var(--tinta);
+  padding: 0 max(16px, calc(70px * var(--esc, 1)));
+  background: var(--papel);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.ficha__pestanas::-webkit-scrollbar {
+  display: none;
+}
+
+.ficha__pestana {
+  flex: none;
+  border: 0;
+  border-right: 2px solid var(--tinta);
+  background: transparent;
+  padding: max(10px, calc(18px * var(--esc, 1))) max(12px, calc(28px * var(--esc, 1)));
+  font-weight: 700;
+  font-size: max(10px, calc(16px * var(--esc, 1)));
+  letter-spacing: 0.12em;
+  transition: background 0.25s, color 0.25s;
+}
+
+.ficha__pestana:first-child {
+  border-left: 2px solid var(--tinta);
+}
+
+.ficha__pestana--activa {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+/* ---- secciones ---- */
+.ficha__seccion {
+  padding: max(28px, calc(90px * var(--esc, 1))) max(16px, calc(70px * var(--esc, 1))) max(32px, calc(100px * var(--esc, 1)));
+  background: var(--papel);
+}
+
+.ficha__rotulo {
+  font-size: max(34px, calc(130px * var(--esc, 1)));
+  line-height: 0.8;
+  font-weight: 400;
+  margin-bottom: max(16px, calc(40px * var(--esc, 1)));
+}
+
+.ficha__video {
+  background: var(--sala);
+  color: var(--papel);
+}
+
+/* ---- reproductor ---- */
+.repro {
+  position: relative;
+  background: #0a0908;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.repro__video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #0a0908;
+}
+
+.repro__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max(54px, calc(92px * var(--esc, 1)));
+  height: max(54px, calc(92px * var(--esc, 1)));
+  border-radius: 50%;
+  border: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.repro__play:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.repro--andando .repro__play,
+.repro--sin-archivo .repro__play {
+  display: none;
+}
+
+.repro__barra {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 clamp(16px, 2.5vw, 36px) clamp(16px, 2.5vw, 36px);
+  background: linear-gradient(to top, rgba(10, 9, 8, 0.75), rgba(10, 9, 8, 0) 100%);
+  padding-top: 70px;
+  transform: translateY(0);
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.2, 1);
+}
+
+.repro--quieta .repro__barra {
+  transform: translateY(110%);
+}
+
+.repro__fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--papel);
+  font-size: clamp(10px, 0.9vw, 13px);
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+}
+
+.repro__linea {
+  height: 2px;
+  background: rgba(238, 230, 211, 0.35);
+  cursor: pointer;
+  touch-action: none;
+}
+
+.repro__avance {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--color);
+}
+
+/* ---- tira de fílmico ---- */
+.tira {
+  margin-top: clamp(18px, 2.4vw, 34px);
+  background: #0a0908;
+}
+
+.tira__perforado {
+  display: block;
+  height: 30px;
+  padding: 9px 0;
+  box-sizing: border-box;
+  background: repeating-linear-gradient(90deg, #0000 0 12px, #eee6d3 12px 28px, #0000 28px 40px);
+  background-clip: content-box;
+}
+
+.tira__fotos {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 12px;
+  padding: 0 12px;
+}
+
+.tira__fotos img {
+  width: 100%;
+  height: max(76px, calc(168px * var(--esc, 1)));
+  object-fit: cover;
+}
+
+/* ---- board ---- */
+.ficha__board {
+  background: #e2d7c0;
+}
+
+.board__marco {
+  background: #f6f1e6;
+  border: 3px solid var(--tinta);
+  padding: clamp(14px, 2.5vw, 36px);
+  box-shadow: 14px 14px 0 var(--tinta);
+}
+
+.board__marco img {
+  width: 100%;
+  max-height: 820px;
+  object-fit: contain;
+  background: #fff;
+}
+
+/* ---- piezas ---- */
+.piezas__grande,
+.piezas__caja {
+  border: 3px solid var(--tinta);
+  overflow: hidden;
+}
+
+.piezas__grande img {
+  width: 100%;
+  height: max(180px, calc(700px * var(--esc, 1)));
+  object-fit: cover;
+}
+
+.piezas__par,
+.piezas__grilla {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 1.7vw, 24px);
+  margin-top: clamp(12px, 1.7vw, 24px);
+}
+
+.piezas__tres {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.7vw, 24px);
+}
+
+.piezas__caja img {
+  width: 100%;
+  height: max(130px, calc(380px * var(--esc, 1)));
+  object-fit: cover;
+  display: block;
+}
+
+.piezas__caja--contain img {
+  object-fit: contain;
+  background: var(--papel-claro);
+}
+
+/* ---- estrellas ---- */
+.ficha__estrellas {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--tinta);
+}
+
+.estrellas__tuyas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.estrellas__rotulo {
+  font-size: clamp(10px, 0.9vw, 13px);
+  letter-spacing: 0.16em;
+}
+
+.estrellas__picker {
+  display: flex;
+}
+
+.estrella {
+  background: transparent;
+  border: 0;
+  padding: 4px;
+  font-size: max(26px, calc(64px * var(--esc, 1)));
+  line-height: 1;
+  color: var(--gris);
+}
+
+.estrella--puesta {
+  color: var(--dorado);
+}
+
+/* ---- próxima función ---- */
+.ficha__proxima-rotulo {
+  font-size: clamp(11px, 1vw, 14px);
+  letter-spacing: 0.2em;
+  margin: 0 0 20px;
+}
+
+.proxima {
+  display: flex;
+  width: 100%;
+  height: max(110px, calc(250px * var(--esc, 1)));
+  padding: 0;
+  border: 0;
+  text-align: left;
+  background: var(--color);
+  color: var(--tinta-entrada);
+  -webkit-mask: radial-gradient(circle 34px at 0 50%, #0000 98%, #000) left/51% 100% no-repeat,
+                radial-gradient(circle 34px at 100% 50%, #0000 98%, #000) right/51% 100% no-repeat;
+          mask: radial-gradient(circle 34px at 0 50%, #0000 98%, #000) left/51% 100% no-repeat,
+                radial-gradient(circle 34px at 100% 50%, #0000 98%, #000) right/51% 100% no-repeat;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.proxima:hover {
+  transform: translateY(-5px);
+}
+
+.proxima__foto {
+  flex: none;
+  width: max(90px, calc(420px * var(--esc, 1)));
+  height: 100%;
+}
+
+.proxima__datos {
+  flex: 1;
+  min-width: 0;
+  padding: max(12px, calc(34px * var(--esc, 1))) max(14px, calc(50px * var(--esc, 1)));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.proxima__meta {
+  font-size: clamp(9px, 0.9vw, 13px);
+  letter-spacing: 0.14em;
+}
+
+.proxima__titulo {
+  font-size: max(18px, calc(var(--fs-proxima, 96px) * var(--esc, 1)));
+  font-weight: 700;
+  line-height: 0.85;
+}
+
+.proxima__talon {
+  flex: none;
+  width: max(62px, calc(200px * var(--esc, 1)));
+  border-left: 3px dashed var(--tinta-entrada);
+  background: var(--papel-claro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: max(11px, calc(22px * var(--esc, 1)));
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 720px) {
+  .ficha__creditos {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .ficha__estrellas {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .estrellas__tuyas {
+    align-items: flex-start;
+  }
+
+  .tira__fotos {
+    grid-auto-flow: column;
+    grid-auto-columns: 46%;
+    overflow-x: auto;
+  }
+
+  .piezas__tres,
+  .piezas__grilla,
+  .piezas__par {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .board__marco {
+    box-shadow: 8px 8px 0 var(--tinta);
+  }
+}

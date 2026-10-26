@@ -1,0 +1,276 @@
+.cartelera {
+  position: relative;
+  z-index: 2;
+  background: var(--papel);
+  padding: clamp(60px, 8vw, 110px) var(--borde) clamp(70px, 9vw, 120px);
+}
+
+.cartelera__titulo {
+  font-size: clamp(74px, 14vw, 200px);
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  border-bottom: 2px solid var(--tinta);
+  padding-bottom: clamp(18px, 2.6vw, 36px);
+}
+
+.cartelera__grilla {
+  list-style: none;
+  margin: clamp(34px, 5vw, 72px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(30px, 4.4vw, 64px) clamp(26px, 3.9vw, 56px);
+}
+
+.entrada {
+  display: flex;
+  width: 100%;
+  height: clamp(220px, 21.7vw, 312px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: var(--tinta-entrada);
+  transform: rotate(var(--giro));
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.entrada:hover,
+.entrada:focus-visible {
+  transform: translateY(-6px) rotate(0deg);
+}
+
+.entrada__cuerpo,
+.entrada__talon {
+  filter: drop-shadow(0 14px 18px rgba(27, 25, 22, 0.18));
+}
+
+.entrada__cuerpo {
+  position: relative;
+  flex: 1;
+  display: flex;
+  min-width: 0;
+  -webkit-mask: radial-gradient(circle 16px at 0 50%, #0000 98%, #000);
+          mask: radial-gradient(circle 16px at 0 50%, #0000 98%, #000);
+}
+
+.entrada__papel {
+  flex: 1;
+  display: flex;
+  gap: clamp(14px, 1.9vw, 26px);
+  min-width: 0;
+  background: var(--color);
+  padding: clamp(16px, 1.7vw, 24px) clamp(16px, 1.7vw, 24px) clamp(16px, 1.7vw, 24px) clamp(20px, 2.5vw, 36px);
+}
+
+.entrada__foto {
+  flex: none;
+  width: clamp(130px, 14.6vw, 210px);
+  height: 100%;
+  max-height: clamp(160px, 18.3vw, 264px);
+  border: 6px solid var(--papel-claro);
+}
+
+.entrada__datos {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.entrada__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: clamp(10px, 0.9vw, 13px);
+  letter-spacing: 0.1em;
+}
+
+.entrada__meta span:last-child {
+  text-align: right;
+}
+
+.entrada__filete {
+  height: 2px;
+  background: var(--tinta-entrada);
+  margin-top: 10px;
+}
+
+.entrada__titulo {
+  margin-top: auto;
+  font-size: clamp(30px, 4vw, 58px);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+
+.entrada__dentado {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1px;
+  width: 9px;
+  opacity: 0;
+  visibility: hidden;
+  background:
+    linear-gradient(135deg, var(--papel-claro) 25%, #0000 25%) 0 0 / 9px 9px,
+    linear-gradient(45deg, var(--papel-claro) 25%, #0000 25%) 0 0 / 9px 9px;
+}
+
+.entrada__talon {
+  flex: none;
+  width: clamp(74px, 7.2vw, 104px);
+  display: flex;
+  -webkit-mask: radial-gradient(circle 16px at 100% 50%, #0000 98%, #000);
+          mask: radial-gradient(circle 16px at 100% 50%, #0000 98%, #000);
+}
+
+.entrada__talon-papel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 0;
+  background: var(--papel-claro);
+  border-left: 3px dashed var(--tinta-entrada);
+}
+
+.entrada__talon-texto {
+  flex: 1;
+  white-space: nowrap;
+  font-size: clamp(18px, 1.8vw, 26px);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.entrada__barras {
+  flex: none;
+  width: 56px;
+  height: 34px;
+}
+
+@media (max-width: 1000px) {
+  .cartelera__grilla {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .entrada {
+    height: 260px;
+  }
+
+  .entrada__titulo {
+    font-size: 44px;
+  }
+
+  .entrada__foto {
+    width: 180px;
+  }
+}
+
+@media (max-width: 720px) {
+  .cartelera {
+    padding: 36px 16px 50px;
+  }
+
+  .cartelera__titulo {
+    font-size: min(96px, 24vw);
+    padding-bottom: 22px;
+  }
+
+  .cartelera__grilla {
+    gap: 26px;
+    margin-top: 30px;
+  }
+
+  .entrada {
+    height: auto;
+    flex-direction: column;
+    background: transparent;
+  }
+
+  /* Cada parte lleva su propia muesca, así se pueden separar sin recortarse. */
+  .entrada__cuerpo {
+    filter: drop-shadow(0 10px 16px rgba(27, 25, 22, 0.16));
+    -webkit-mask: radial-gradient(circle 14px at 0 100%, #0000 98%, #000) left/51% 100% no-repeat,
+                  radial-gradient(circle 14px at 100% 100%, #0000 98%, #000) right/51% 100% no-repeat;
+            mask: radial-gradient(circle 14px at 0 100%, #0000 98%, #000) left/51% 100% no-repeat,
+                  radial-gradient(circle 14px at 100% 100%, #0000 98%, #000) right/51% 100% no-repeat;
+  }
+
+  .entrada__talon {
+    filter: drop-shadow(0 10px 16px rgba(27, 25, 22, 0.16));
+    -webkit-mask: radial-gradient(circle 14px at 0 0, #0000 98%, #000) left/51% 100% no-repeat,
+                  radial-gradient(circle 14px at 100% 0, #0000 98%, #000) right/51% 100% no-repeat;
+            mask: radial-gradient(circle 14px at 0 0, #0000 98%, #000) left/51% 100% no-repeat,
+                  radial-gradient(circle 14px at 100% 0, #0000 98%, #000) right/51% 100% no-repeat;
+  }
+
+  .entrada__dentado {
+    top: auto;
+    right: 0;
+    left: 0;
+    bottom: -1px;
+    width: auto;
+    height: 9px;
+    background:
+      linear-gradient(225deg, var(--papel-claro) 25%, #0000 25%) 0 0 / 9px 9px,
+      linear-gradient(315deg, var(--papel-claro) 25%, #0000 25%) 0 0 / 9px 9px;
+  }
+
+  .entrada__papel {
+    gap: 14px;
+    padding: 18px 16px 16px;
+  }
+
+  .entrada__foto {
+    width: 120px;
+    height: 150px;
+    max-height: none;
+    border-width: 4px;
+  }
+
+  .entrada__meta {
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    gap: 6px;
+  }
+
+  .entrada__meta span {
+    white-space: nowrap;
+  }
+
+  .entrada__filete {
+    display: none;
+  }
+
+  .entrada__titulo {
+    font-size: 36px;
+  }
+
+  .entrada__talon {
+    width: 100%;
+  }
+
+  .entrada__talon-papel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 22px;
+    border-left: 0;
+    border-top: 3px dashed var(--tinta-entrada);
+  }
+
+  .entrada__talon-texto {
+    flex: none;
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 18px;
+  }
+
+  .entrada__barras {
+    width: 60px;
+    height: 20px;
+  }
+}

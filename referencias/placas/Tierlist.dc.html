@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Uri &amp; Guada — Tierlist</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Advercase';src:url('/fonts/Advercase-Regular.otf') format('opentype');font-weight:400;font-style:normal}
+@font-face{font-family:'Advercase';src:url('/fonts/Advercase-Bold.otf') format('opentype');font-weight:700;font-style:normal}
+@font-face{font-family:'Roycella';src:url('/fonts/Roycella.ttf') format('truetype')}
+body{margin:0}
+a{color:#1B1916;text-decoration:none}a:hover{color:#BA0101}
+button{font:inherit;cursor:pointer}
+.adv{font-family:'Advercase',Georgia,serif}
+.roy{font-family:'Roycella',cursive;font-weight:400}
+.mono{font-family:'Courier Prime',monospace}
+.arch{font-family:'Archivo Narrow',sans-serif}
+.grain{position:absolute;inset:0;background-image:url('/textura/grano.png');pointer-events:none;mix-blend-mode:multiply;z-index:50}
+.duo img{filter:grayscale(1) contrast(1.25) brightness(1.08);mix-blend-mode:multiply}
+.notch{-webkit-mask:radial-gradient(circle 16px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 16px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 16px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.mini{-webkit-mask:radial-gradient(circle 8px at 0 70%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 70%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 8px at 0 70%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 70%,#0000 98%,#000) right/51% 100% no-repeat}
+</style>
+</helmet>
+<div class="arch" style="position: relative; width: 1440px; min-height: 1480px; background: #EEE6D3; color: #1B1916; overflow: hidden">
+<div class="grain" style="opacity: {{grano}}"></div>
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 22px 80px; border-bottom: 2px solid #1B1916">
+<a href="Main.dc.html" class="roy" style="font-size: 48px; line-height: 1">Uri &amp; Guada</a>
+<nav style="display: flex; gap: 44px; font-size: 16px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase">
+<a href="Cartelera.dc.html">Cartelera</a>
+<a href="Tierlist.dc.html" aria-current="page" style="color: #BA0101; border-bottom: 2px solid #BA0101; padding-bottom: 4px">Tierlist</a>
+<a href="Main.dc.html#contacto">Contacto</a>
+</nav>
+<a href="Main.dc.html#contacto" class="notch" style="background: #BA0101; color: #EEE6D3; padding: 15px 32px; font-weight: 700; letter-spacing: 0.14em; font-size: 14px">SACAR ENTRADA</a>
+</header>
+
+<section style="padding: 70px 80px 30px; display: flex; justify-content: space-between; align-items: flex-end">
+<div style="font-size: 190px; font-weight: 700; line-height: 0.8; letter-spacing: -0.03em">TIERLIST</div>
+<div style="display: flex; gap: 12px">
+<button type="button" onClick="{{reset}}" style="border: 2px solid #1B1916; background: transparent; padding: 16px 24px; font-weight: 700; font-size: 14px; letter-spacing: 0.12em">REINICIAR</button>
+<button type="button" class="notch" style="border: 0; background: #1B1916; color: #EEE6D3; padding: 18px 34px; font-weight: 700; font-size: 14px; letter-spacing: 0.12em">DESCARGAR MI TIERLIST ↓</button>
+</div>
+</section>
+
+<section style="padding: 20px 80px 0">
+<div style="border: 3px solid #1B1916; background: #1B1916; display: flex; flex-direction: column; gap: 3px">
+<sc-for list="{{tiers}}" as="t" hint-placeholder-count="7">
+<div style="display: flex; min-height: 176px; background: #26221E">
+<button type="button" onClick="{{t.place}}" aria-label="Poner la idea elegida en {{t.label}}" style="flex: none; width: 190px; border: 0; background: {{t.color}}; color: #1B1916; font-weight: 700; font-size: 24px; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; padding: 0 14px">{{t.label}}</button>
+<div style="flex: 1; display: flex; flex-wrap: wrap; gap: 12px; padding: 12px; align-items: center">
+<sc-for list="{{t.items}}" as="i" hint-placeholder-count="2">
+<button type="button" onClick="{{i.pick}}" aria-pressed="{{i.sel}}" aria-label="{{i.titulo}}" class="mini" style="width: 128px; height: 152px; padding: 0; border: 0; background: {{i.color}}; display: flex; flex-direction: column; outline: {{i.ring}}; outline-offset: 3px">
+<span class="{{i.frame}}" style="display: block; width: 100%; height: 100px; background: {{i.bg}}; overflow: hidden"><img src="{{i.img}}" alt="" style="width: 100%; height: 100%; object-fit: {{i.fit}}; display: block"></span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 6px; font-weight: 700; font-size: 15px; line-height: 1; color: {{i.dark}}; border-top: 2px dashed {{i.dark}}">{{i.titulo}}</span>
+</button>
+</sc-for>
+<button type="button" onClick="{{t.place}}" aria-label="Soltar acá" style="width: 128px; height: 152px; border: 2px dashed {{t.hint}}; background: transparent; color: {{t.hint}}; font-weight: 700; font-size: 28px">+</button>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="padding: 34px 80px 100px">
+<div class="mono" style="font-size: 13px; letter-spacing: 0.16em; margin-bottom: 14px">EN CARTEL</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; min-height: 176px; border: 3px dashed #1B1916; padding: 12px; align-items: center">
+<sc-for list="{{pool}}" as="i" hint-placeholder-count="5">
+<button type="button" onClick="{{i.pick}}" aria-pressed="{{i.sel}}" aria-label="{{i.titulo}}" class="mini" style="width: 128px; height: 152px; padding: 0; border: 0; background: {{i.color}}; display: flex; flex-direction: column; outline: {{i.ring}}; outline-offset: 3px; transform: {{i.lift}}">
+<span class="{{i.frame}}" style="display: block; width: 100%; height: 100px; background: {{i.bg}}; overflow: hidden"><img src="{{i.img}}" alt="" style="width: 100%; height: 100%; object-fit: {{i.fit}}; display: block"></span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 6px; font-weight: 700; font-size: 15px; line-height: 1; color: {{i.dark}}; border-top: 2px dashed {{i.dark}}">{{i.titulo}}</span>
+</button>
+</sc-for>
+</div>
+</section>
+<footer class="mono" style="background: #1B1916; color: #B9AF9C; padding: 28px 80px; font-size: 12px; letter-spacing: 0.14em">© URI &amp; GUADA</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"grano":{"editor":"range","min":0,"max":1,"step":0.05,"default":0.8,"section":"Textura"},"$preview":{"width":1440,"height":1480}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.start = { mm: 0, lp: 0, ap: 1, ks: 2 };
+    this.state = { place: Object.assign({}, this.start), sel: 'sp' };
+  }
+  renderVals() {
+    const ideas = [
+      { id: 'ap', titulo: 'ANDÁ PIDIENDO', color: '#EBA5B3', dark: '#7A1229', img: '/img/anda-pidiendo/hero-sillon.jpg', frame: 'duo', bg: '#EBA5B3', fit: 'cover' },
+      { id: 'mm', titulo: 'MUCHA MERD', color: '#8EC8D2', dark: '#0F4C57', img: '/img/mucha-merd/logo-vertical.jpg', frame: 'duo', bg: '#8EC8D2', fit: 'cover' },
+      { id: 'lp', titulo: 'LA P#%! QUE TE PARIÓ', color: '#E2662C', dark: '#3E1303', img: '/img/lpqtp/hero-soldado.jpg', frame: 'duo', bg: '#E2662C', fit: 'cover' },
+      { id: 'sp', titulo: 'SPOTIFUCK', color: '#86AE76', dark: '#1E3B16', img: '/img/spotifuck/hero-cama.jpg', frame: 'duo', bg: '#86AE76', fit: 'cover' },
+      { id: 'nb', titulo: 'NO ME BAÑO', color: '#8FA8CF', dark: '#1C2D4F', img: '/img/no-me-bano/mural.jpg', frame: 'duo', bg: '#8FA8CF', fit: 'cover' },
+      { id: 'ks', titulo: 'KAMASUTRA', color: '#D8C7A2', dark: '#6E0000', img: '/img/kamasutra/grafica-eeuu-china.jpg', frame: 'duo', bg: '#D8C7A2', fit: 'cover' },
+      { id: 'jw', titulo: 'CÓD1GOS D3 R3UN10N', color: '#EBC54C', dark: '#1F3A8A', img: '/img/codigos/key-visual.jpg', frame: 'duo', bg: '#EBC54C', fit: 'cover' },
+      { id: 'cl', titulo: 'CLARI', color: '#BBA7D8', dark: '#3B2563', img: '/img/clari/ticket.jpg', frame: 'duo', bg: '#BBA7D8', fit: 'cover' }
+    ];
+    const place = this.state.place;
+    const sel = this.state.sel;
+    const deco = (it) => Object.assign({}, it, {
+      sel: sel === it.id ? 'true' : 'false',
+      ring: sel === it.id ? '4px solid #E99D25' : '0 solid transparent',
+      lift: sel === it.id ? 'translateY(-6px)' : 'none',
+      pick: () => this.setState({ sel: sel === it.id ? null : it.id })
+    });
+    const defs = [
+      { label: 'Obra maestra', color: '#E98A84' },
+      { label: 'Cine', color: '#F0B27C' },
+      { label: 'Está bien', color: '#F1D27A' },
+      { label: 'Me dormí', color: '#B8DA86' },
+      { label: 'Mucha merd', color: '#A39BE6' }
+    ];
+    const tiers = defs.map((d, k) => Object.assign({}, d, {
+      hint: sel ? '#E99D25' : '#4A443B',
+      items: ideas.filter((it) => place[it.id] === k).map(deco),
+      place: () => {
+        if (!this.state.sel) return;
+        const p = Object.assign({}, this.state.place); p[this.state.sel] = k;
+        this.setState({ place: p, sel: null });
+      }
+    }));
+    const pool = ideas.filter((it) => place[it.id] === undefined).map(deco);
+    return {
+      grano: this.props.grano ?? 0.8,
+      tiers, pool,
+      reset: () => this.setState({ place: {}, sel: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

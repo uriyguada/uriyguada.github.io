@@ -1,0 +1,329 @@
+.hero {
+  position: relative;
+  z-index: 2;
+  background: var(--sala);
+  color: var(--papel);
+  padding: 0 var(--borde) clamp(54px, 6vw, 90px);
+}
+
+.hero__interior {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ---- barra ---- */
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  padding: 26px 0 30px;
+}
+
+.barra__nav {
+  display: flex;
+  gap: clamp(18px, 2.6vw, 40px);
+  font-size: clamp(12px, 1.1vw, 16px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.barra__nav a {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.barra__nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--papel);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.barra__nav a:hover::after,
+.barra__nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.barra__fin {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+}
+
+.sonido {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 2px solid rgba(238, 230, 211, 0.35);
+  color: var(--papel);
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.sonido:hover {
+  border-color: var(--papel);
+  transform: translateY(-2px);
+}
+
+.sonido .cruz {
+  opacity: 0;
+}
+
+.sonido--mudo .onda-1,
+.sonido--mudo .onda-2 {
+  opacity: 0;
+}
+
+.sonido--mudo .cruz {
+  opacity: 1;
+}
+
+.boton-rojo {
+  display: inline-block;
+  background: var(--rojo);
+  color: var(--papel);
+  padding: 15px clamp(18px, 2.2vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: clamp(11px, 1vw, 14px);
+  white-space: nowrap;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.boton-rojo:hover {
+  transform: translateY(-3px);
+}
+
+/* ---- la entrada partida al medio ---- */
+.entrada-dupla {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1280 / 780;
+  display: flex;
+}
+
+.entrada-dupla__mitad {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+}
+
+.entrada-dupla__mitad--uri {
+  border-radius: 22px 0 0 22px;
+  -webkit-mask: radial-gradient(circle 34px at 0 50%, #0000 98%, #000);
+          mask: radial-gradient(circle 34px at 0 50%, #0000 98%, #000);
+}
+
+.entrada-dupla__mitad--guada img {
+  filter: grayscale(1) contrast(1.05) brightness(1.45);
+}
+
+.entrada-dupla__mitad--guada {
+  border-radius: 0 22px 22px 0;
+  -webkit-mask: radial-gradient(circle 34px at 100% 50%, #0000 98%, #000);
+          mask: radial-gradient(circle 34px at 100% 50%, #0000 98%, #000);
+}
+
+.entrada-dupla__troquel {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  bottom: 30px;
+  border-left: 4px dashed var(--sala);
+  transform: translateX(-2px);
+  transform-origin: 50% 0;
+}
+
+.entrada-dupla__ojal {
+  position: absolute;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  margin-left: -22px;
+  border-radius: 50%;
+  background: var(--sala);
+}
+
+.entrada-dupla__ojal--a {
+  top: -22px;
+}
+
+.entrada-dupla__ojal--b {
+  bottom: -22px;
+}
+
+/* ---- la firma ---- */
+.hero__firma {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.hero__firma-v {
+  display: none;
+}
+
+.firma {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.firma__nombre,
+.firma__amp {
+  font-family: 'Roycella', cursive;
+  font-weight: 400;
+}
+
+.firma--sombra .firma__nombre {
+  filter: drop-shadow(0 6px 26px rgba(0, 0, 0, 0.45));
+}
+
+.firma--sombra .firma__amp {
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+}
+
+.hero__firma-h {
+  width: 82%;
+  max-width: 1040px;
+}
+
+.hero__firma-v {
+  width: 82%;
+}
+
+/* ---- bajada ---- */
+.hero__bajada {
+  clip-path: inset(0 0 0 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 28px);
+  margin: clamp(54px, 7vw, 90px) 0 0;
+  font-weight: 700;
+  font-size: clamp(16px, 2vw, 30px);
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+}
+
+.hero__filete {
+  width: clamp(40px, 8vw, 120px);
+  height: 2px;
+  background: var(--papel);
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 0 16px 40px;
+  }
+
+  .barra {
+    padding: 14px 0 20px;
+  }
+
+  .barra__nav {
+    gap: 12px;
+    font-size: 10px;
+  }
+
+  .sonido {
+    width: 34px;
+    height: 34px;
+  }
+
+  .boton-rojo {
+    padding: 11px 12px;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+  }
+
+  .entrada-dupla {
+    flex-direction: column;
+    aspect-ratio: 360 / 560;
+  }
+
+  .entrada-dupla__mitad {
+    width: 100%;
+    height: 50%;
+  }
+
+  .entrada-dupla__mitad--uri {
+    border-radius: 18px 18px 0 0;
+    -webkit-mask: radial-gradient(circle 26px at 50% 0, #0000 98%, #000);
+            mask: radial-gradient(circle 26px at 50% 0, #0000 98%, #000);
+  }
+
+  .entrada-dupla__mitad--guada {
+    border-radius: 0 0 18px 18px;
+    -webkit-mask: radial-gradient(circle 26px at 50% 100%, #0000 98%, #000);
+            mask: radial-gradient(circle 26px at 50% 100%, #0000 98%, #000);
+  }
+
+  .entrada-dupla__troquel {
+    left: 22px;
+    right: 22px;
+    top: 50%;
+    bottom: auto;
+    border-left: 0;
+    border-top: 4px dashed var(--sala);
+    transform: translateY(-2px);
+    transform-origin: 0 50%;
+  }
+
+  .entrada-dupla__ojal {
+    width: 34px;
+    height: 34px;
+    top: 50%;
+    margin: -17px 0 0 0;
+    left: auto;
+  }
+
+  .entrada-dupla__ojal--a {
+    left: -17px;
+  }
+
+  .entrada-dupla__ojal--b {
+    right: -17px;
+    bottom: auto;
+  }
+
+  .hero__firma {
+    inset: 0;
+    align-items: center;
+    bottom: 0;
+  }
+
+  .hero__firma-h {
+    display: none;
+  }
+
+  .hero__firma-v {
+    display: block;
+    width: 86%;
+  }
+
+  .hero__bajada {
+    margin-top: 34px;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+  }
+}
