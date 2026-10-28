@@ -83,7 +83,7 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  font-size: clamp(10px, 0.9vw, 13px);
+  font-size: max(var(--min-txt), clamp(10px, 0.9vw, 13px));
   letter-spacing: 0.1em;
 }
 
@@ -99,24 +99,12 @@
 
 .entrada__titulo {
   margin-top: auto;
-  font-size: clamp(30px, 4vw, 58px);
+  font-size: calc(clamp(30px, 4vw, 58px) * var(--escala-titulo, 1));
   font-weight: 700;
   line-height: 0.88;
   letter-spacing: -0.01em;
 }
 
-.entrada__dentado {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: -1px;
-  width: 9px;
-  opacity: 0;
-  visibility: hidden;
-  background:
-    linear-gradient(135deg, var(--papel-claro) 25%, #0000 25%) 0 0 / 9px 9px,
-    linear-gradient(45deg, var(--papel-claro) 25%, #0000 25%) 0 0 / 9px 9px;
-}
 
 .entrada__talon {
   flex: none;
@@ -151,6 +139,28 @@
   height: 34px;
 }
 
+/* Con el zoom de escritorio sobra ancho: las entradas mantienen su proporción
+   y se acomodan de a varias por fila, centradas. */
+@media (min-width: 1024px) {
+  .cartelera__titulo,
+  .cartelera__grilla {
+    max-width: 2700px;
+    margin-inline: auto;
+  }
+
+  .cartelera__grilla {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cartelera__item {
+    flex: 0 0 620px;
+    min-width: 0;
+    max-width: 620px;
+  }
+}
+
 @media (max-width: 1000px) {
   .cartelera__grilla {
     grid-template-columns: minmax(0, 1fr);
@@ -161,7 +171,7 @@
   }
 
   .entrada__titulo {
-    font-size: 44px;
+    font-size: calc(44px * var(--escala-titulo, 1));
   }
 
   .entrada__foto {
@@ -207,17 +217,6 @@
                   radial-gradient(circle 14px at 100% 0, #0000 98%, #000) right/51% 100% no-repeat;
   }
 
-  .entrada__dentado {
-    top: auto;
-    right: 0;
-    left: 0;
-    bottom: -1px;
-    width: auto;
-    height: 9px;
-    background:
-      linear-gradient(225deg, var(--papel-claro) 25%, #0000 25%) 0 0 / 9px 9px,
-      linear-gradient(315deg, var(--papel-claro) 25%, #0000 25%) 0 0 / 9px 9px;
-  }
 
   .entrada__papel {
     gap: 14px;
@@ -246,7 +245,7 @@
   }
 
   .entrada__titulo {
-    font-size: 36px;
+    font-size: calc(36px * var(--escala-titulo, 1));
   }
 
   .entrada__talon {

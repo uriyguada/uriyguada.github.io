@@ -1,6 +1,10 @@
 /* ---- hero de la ficha ---- */
 .ficha__hero {
   position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
   background: var(--heroBg);
   color: #f4e9d6;
   padding: max(18px, calc(46px * var(--esc, 1))) max(16px, calc(70px * var(--esc, 1))) max(32px, calc(90px * var(--esc, 1)));
@@ -10,7 +14,7 @@
   display: flex;
   align-items: center;
   gap: max(8px, calc(18px * var(--esc, 1)));
-  font-size: max(9px, calc(13px * var(--esc, 1)));
+  font-size: max(var(--min-txt), max(9px, calc(13px * var(--esc, 1))));
   letter-spacing: 0.16em;
 }
 
@@ -20,151 +24,32 @@
   background: currentColor;
 }
 
-.ficha__creditos {
-  display: flex;
-  justify-content: center;
-  gap: max(10px, calc(70px * var(--esc, 1)));
-  flex-wrap: wrap;
-  border: 2px solid currentColor;
-  border-radius: 40px;
-  padding: max(7px, calc(12px * var(--esc, 1))) max(12px, calc(30px * var(--esc, 1)));
-  margin: max(14px, calc(38px * var(--esc, 1))) auto 0;
-  width: fit-content;
-  max-width: 100%;
-  font-size: max(9px, calc(15px * var(--esc, 1)));
-  letter-spacing: 0.14em;
-  text-align: center;
-}
 
 .ficha__titulo {
   text-align: center;
   font-size: calc(var(--fs-titulo, 170px) * var(--esc, 1));
   line-height: 0.86;
   letter-spacing: -0.03em;
-  margin-top: max(10px, calc(26px * var(--esc, 1)));
+  margin-top: auto;
 }
 
 .ficha__para {
   text-align: center;
-  font-size: max(11px, calc(22px * var(--esc, 1)));
+  font-size: max(var(--min-txt), max(11px, calc(22px * var(--esc, 1))));
   margin: 8px 0 0;
 }
 
-.ficha__marco {
-  position: relative;
-  width: 100%;
-  margin: max(34px, calc(70px * var(--esc, 1))) auto 0;
-}
 
-.ficha__foto {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1120 / 600;
-  border-radius: max(14px, calc(46px * var(--esc, 1)));
-  border: 3px solid var(--tinta);
-  background: #f2d3bf;
-}
 
 .ficha__logline {
   text-align: center;
-  font-size: max(12px, calc(22px * var(--esc, 1)));
+  font-size: max(var(--min-txt), max(12px, calc(22px * var(--esc, 1))));
   line-height: 1.5;
   letter-spacing: 0.06em;
   font-weight: 700;
   max-width: 1000px;
-  margin: max(30px, calc(80px * var(--esc, 1))) auto 0;
-}
-
-/* ---- pegatinas ---- */
-.pegatina {
-  position: absolute;
-  z-index: 2;
-  color: var(--tinta);
-  font-weight: 700;
-}
-
-.s1 {
-  left: calc(-34px * var(--esc, 1));
-  top: calc(-28px * var(--esc, 1));
-  transform: rotate(-6deg);
-  border: 3px solid var(--tinta);
-  border-radius: 12px;
-  padding: max(5px, calc(12px * var(--esc, 1))) max(10px, calc(24px * var(--esc, 1)));
-  font-size: max(10px, calc(26px * var(--esc, 1)));
-  letter-spacing: 0.02em;
-}
-
-.s2 {
-  right: calc(-70px * var(--esc, 1));
-  top: calc(-70px * var(--esc, 1));
-  width: max(70px, calc(180px * var(--esc, 1)));
-  height: max(70px, calc(180px * var(--esc, 1)));
-  transform: rotate(12deg);
-}
-
-.s3 {
-  right: calc(-66px * var(--esc, 1));
-  bottom: calc(-66px * var(--esc, 1));
-  width: max(66px, calc(170px * var(--esc, 1)));
-  height: max(66px, calc(170px * var(--esc, 1)));
-  border: 3px solid var(--tinta);
-  clip-path: polygon(50% 0%, 61% 18%, 82% 10%, 80% 32%, 100% 40%, 85% 56%, 98% 76%, 76% 78%, 70% 100%, 52% 86%, 34% 100%, 26% 80%, 4% 80%, 14% 60%, 0% 42%, 20% 32%, 16% 10%, 38% 18%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(8deg);
-  font-size: max(9px, calc(23px * var(--esc, 1)));
-  line-height: 0.95;
-  text-align: center;
-}
-
-.s4 {
-  left: calc(-24px * var(--esc, 1));
-  bottom: calc(-20px * var(--esc, 1));
-  transform: rotate(-4deg);
-  border: 3px solid var(--tinta);
-  padding: max(4px, calc(10px * var(--esc, 1))) max(12px, calc(26px * var(--esc, 1)));
-  font-size: max(9px, calc(19px * var(--esc, 1)));
-  letter-spacing: 0.06em;
-  clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0 50%);
-}
-
-/* ---- pestañas ---- */
-.ficha__pestanas {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none;
-  border-bottom: 2px solid var(--tinta);
-  padding: 0 max(16px, calc(70px * var(--esc, 1)));
-  background: var(--papel);
-  position: sticky;
-  top: 0;
-  z-index: 3;
-}
-
-.ficha__pestanas::-webkit-scrollbar {
-  display: none;
-}
-
-.ficha__pestana {
-  flex: none;
-  border: 0;
-  border-right: 2px solid var(--tinta);
-  background: transparent;
-  padding: max(10px, calc(18px * var(--esc, 1))) max(12px, calc(28px * var(--esc, 1)));
-  font-weight: 700;
-  font-size: max(10px, calc(16px * var(--esc, 1)));
-  letter-spacing: 0.12em;
-  transition: background 0.25s, color 0.25s;
-}
-
-.ficha__pestana:first-child {
-  border-left: 2px solid var(--tinta);
-}
-
-.ficha__pestana--activa {
-  background: var(--tinta);
-  color: var(--papel);
+  margin: auto auto 0;
+  padding-top: max(30px, calc(60px * var(--esc, 1)));
 }
 
 /* ---- secciones ---- */
@@ -247,9 +132,36 @@
   justify-content: space-between;
   gap: 12px;
   color: var(--papel);
-  font-size: clamp(10px, 0.9vw, 13px);
+  font-size: max(var(--min-txt), clamp(10px, 0.9vw, 13px));
   letter-spacing: 0.1em;
   margin-bottom: 10px;
+}
+
+.repro__fin {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.repro__grande {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--papel);
+}
+
+.repro__grande:hover {
+  color: var(--color);
+}
+
+.repro:fullscreen {
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .repro__linea {
@@ -300,18 +212,10 @@
   background: #e2d7c0;
 }
 
-.board__marco {
-  background: #f6f1e6;
-  border: 3px solid var(--tinta);
-  padding: clamp(14px, 2.5vw, 36px);
-  box-shadow: 14px 14px 0 var(--tinta);
-}
-
-.board__marco img {
+.board__foto img {
   width: 100%;
-  max-height: 820px;
-  object-fit: contain;
-  background: #fff;
+  height: auto;
+  display: block;
 }
 
 /* ---- piezas ---- */
@@ -389,7 +293,7 @@
 }
 
 .estrellas__rotulo {
-  font-size: clamp(10px, 0.9vw, 13px);
+  font-size: max(var(--min-txt), clamp(10px, 0.9vw, 13px));
   letter-spacing: 0.16em;
 }
 
@@ -412,7 +316,7 @@
 
 /* ---- próxima función ---- */
 .ficha__proxima-rotulo {
-  font-size: clamp(11px, 1vw, 14px);
+  font-size: max(var(--min-txt), clamp(11px, 1vw, 14px));
   letter-spacing: 0.2em;
   margin: 0 0 20px;
 }
@@ -454,7 +358,7 @@
 }
 
 .proxima__meta {
-  font-size: clamp(9px, 0.9vw, 13px);
+  font-size: max(var(--min-txt), clamp(9px, 0.9vw, 13px));
   letter-spacing: 0.14em;
 }
 
@@ -478,20 +382,6 @@
 }
 
 @media (max-width: 720px) {
-  .ficha__creditos {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .ficha__estrellas {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .estrellas__tuyas {
-    align-items: flex-start;
-  }
-
   .tira__fotos {
     grid-auto-flow: column;
     grid-auto-columns: 46%;
@@ -502,9 +392,5 @@
   .piezas__grilla,
   .piezas__par {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .board__marco {
-    box-shadow: 8px 8px 0 var(--tinta);
   }
 }

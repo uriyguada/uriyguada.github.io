@@ -2,14 +2,26 @@
   position: fixed;
   inset: 0;
   z-index: 70;
-  /* sin backdrop-filter: desenfocar toda la página trababa la apertura */
-  background: rgba(16, 14, 12, 0.88);
+  background: var(--sala);
   overflow: hidden;
-  will-change: clip-path;
+  transform: translateY(0);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
 }
 
 .visor[hidden] {
   display: none;
+}
+
+/* abre subiendo desde abajo y cierra bajando: una sola pieza, sin fundidos */
+.visor--subiendo {
+  transform: translateY(100%);
+  transition: none;
+}
+
+.visor--bajando {
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.6, 0, 0.8, 0.4);
 }
 
 body.con-visor {
@@ -23,21 +35,21 @@ body.con-visor {
   display: flex;
   gap: 40px;
   will-change: transform;
-  transition: transform 0.75s cubic-bezier(0.65, 0, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.2, 1);
 }
 
 .panel {
   flex: none;
   width: var(--panel-ancho, 1180px);
-  height: calc(100vh - 88px);
-  border-radius: 32px;
+  height: calc(100vh / var(--z, 1) - 88px);
+  border-radius: 28px;
   overflow: hidden;
   background: var(--papel);
   color: var(--tinta);
   transform: scale(0.94);
   transform-origin: 50% 0;
-  filter: blur(3px) saturate(0.7) brightness(0.62);
-  transition: transform 0.75s cubic-bezier(0.65, 0, 0.2, 1), filter 0.6s ease;
+  filter: brightness(0.45) saturate(0.7);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.2, 1), filter 0.6s ease;
   cursor: pointer;
   touch-action: pan-y;
 }
@@ -51,12 +63,6 @@ body.con-visor {
 /* las fichas lejanas no se pintan: solo la activa y las dos de al lado */
 .panel:not(.panel--activo):not(.panel--vecino) {
   visibility: hidden;
-}
-
-/* mientras abre el barrido, los paneles no animan: se mueve una cosa sola */
-.visor--abriendo .panel,
-.visor--abriendo .visor__pista {
-  transition: none;
 }
 
 .panel__scroll {
@@ -76,101 +82,55 @@ body.con-visor {
   overflow: hidden;
 }
 
+/* la X: dos trazos finos, sin círculo */
 .visor__cerrar {
   position: absolute;
-  right: 26px;
-  top: 20px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid var(--papel);
-  background: var(--sala);
-  color: var(--papel);
-  font-size: 22px;
-  line-height: 1;
+  right: 22px;
+  top: 6px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
   z-index: 5;
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.visor__cerrar:hover {
-  transform: rotate(90deg);
-}
-
-.visor__pildora {
+.visor__cerrar span {
   position: absolute;
-  left: 50%;
-  bottom: 26px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: var(--sala);
-  color: var(--papel);
-  border-radius: 40px;
-  padding: 8px;
-  z-index: 5;
-}
-
-.visor__flecha {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 2px solid var(--papel);
-  background: var(--sala);
-  color: var(--papel);
-  font-size: 24px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.25s, color 0.25s;
-}
-
-.visor__flecha:hover {
+  left: 4px;
+  right: 4px;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
   background: var(--papel);
-  color: var(--sala);
 }
 
-.visor__contador {
-  font-size: 16px;
-  letter-spacing: 0.14em;
-  min-width: 92px;
-  text-align: center;
+.visor__cerrar span:first-child {
+  transform: rotate(45deg);
+}
+
+.visor__cerrar span:last-child {
+  transform: rotate(-45deg);
+}
+
+.visor__cerrar:hover span {
+  background: var(--rojo);
 }
 
 @media (max-width: 720px) {
   .visor__pista {
-    top: 14px;
+    top: 52px;
     gap: 16px;
   }
 
   .panel {
-    height: calc(100vh - 96px);
-    border-radius: 22px;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+    border-radius: 20px;
   }
 
   .visor__cerrar {
-    right: 12px;
+    right: 10px;
     top: 10px;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-  }
-
-  .visor__pildora {
-    bottom: 14px;
-    gap: 10px;
-    padding: 6px;
-  }
-
-  .visor__flecha {
-    width: 44px;
-    height: 44px;
-    font-size: 20px;
-  }
-
-  .visor__contador {
-    font-size: 13px;
-    min-width: 70px;
   }
 }

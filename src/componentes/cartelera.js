@@ -1,8 +1,15 @@
-// Cartelera: las 8 entradas. Al tocar una, se rompe por el troquel con sonido de papel
-// y se abre su ficha. Nada aparece ni desaparece con fundido: todo se mueve.
-import gsap from 'gsap';
+// Cartelera: las 8 entradas. Al tocar una se abre su ficha.
 import { proyectos } from '../data/proyectos.js';
-import { sonarRotura } from '../lib/sonido.js';
+
+// Cada título se achica lo justo para entrar en su entrada (las palabras largas no se cortan).
+function ajustarTitulos(seccion) {
+  for (const e of seccion.querySelectorAll('.entrada')) {
+    const t = e.querySelector('.entrada__titulo');
+    e.style.setProperty('--escala-titulo', '1');
+    const sobra = t.scrollWidth / t.clientWidth;
+    if (sobra > 1) e.style.setProperty('--escala-titulo', ((1 / sobra) * 0.97).toFixed(3));
+  }
+}
 
 function entradaHTML(p) {
   const t = p.ticket;
@@ -21,7 +28,6 @@ function entradaHTML(p) {
               <span class="entrada__titulo">${p.titulo}</span>
             </span>
           </span>
-          <span class="entrada__dentado" aria-hidden="true"></span>
         </span>
         <span class="entrada__talon">
           <span class="entrada__talon-papel">
@@ -42,65 +48,17 @@ export function montarCartelera(seccion, { alAbrir } = {}) {
 
   seccion.addEventListener('dragstart', (e) => e.preventDefault());
 
-  const rotas = new Map();
+  const ajustar = () => ajustarTitulos(seccion);
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(ajustar);
+  let espera = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(espera);
+    espera = setTimeout(ajustar, 150);
+  });
 
   seccion.querySelectorAll('.entrada').forEach((entrada) => {
     entrada.addEventListener('click', () => {
-      const slug = entrada.dataset.slug;
-      if (rotas.has(slug)) return;
-      const volver = romper(entrada);
-      rotas.set(slug, volver);
-      if (alAbrir) {
-        const r = entrada.getBoundingClientRect();
-        const origen = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
-        // primero se ve cortarse la entrada; recién después entra el visor
-        setTimeout(() => alAbrir(slug, origen), 260);
-      }
+      if (alAbrir) alAbrir(entrada.dataset.slug);
     });
   });
-
-  return {
-    recomponer(slug) {
-      const volver = rotas.get(slug);
-      if (!volver) return;
-      rotas.delete(slug);
-      volver();
-    },
-  };
-}
-
-function romper(entrada) {
-  const cuerpo = entrada.querySelector('.entrada__cuerpo');
-  const talon = entrada.querySelector('.entrada__talon');
-  const dentado = entrada.querySelector('.entrada__dentado');
-  const enMobile = window.matchMedia('(max-width: 720px)').matches;
-  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  sonarRotura();
-  if (navigator.vibrate) navigator.vibrate(12);
-  entrada.classList.add('entrada--rota');
-
-  // A dónde sale el talón: al costado en desktop, para abajo en mobile.
-  const vuela = enMobile
-    ? { x: 18, y: 230, rotate: 7 }
-    : { x: 140, y: 300, rotate: 34 };
-
-  if (!reducido) {
-    gsap
-      .timeline({ defaults: { transformOrigin: '50% 50%' } })
-      .set(dentado, { autoAlpha: 1 }, 0.08)
-      .to(cuerpo, { ...(enMobile ? { y: -3, rotate: 0.4 } : { x: -4, rotate: 0.8 }), duration: 0.14, ease: 'power2.out' }, 0)
-      .to(talon, { ...(enMobile ? { y: 5, rotate: -1.2 } : { x: 6, rotate: -2 }), duration: 0.14, ease: 'power2.out' }, 0)
-      .to(talon, { ...vuela, duration: 0.5, ease: 'power2.in' }, 0.16)
-      .to(cuerpo, { x: enMobile ? 0 : -6, y: -8, scale: 1.012, duration: 0.3, ease: 'power2.out' }, 0.16);
-  } else {
-    gsap.set(talon, vuela);
-  }
-
-  // Se recompone de una, mientras el visor todavía tapa todo: la entrada rota no se ve nunca.
-  return function recomponer() {
-    gsap.set([cuerpo, talon], { x: 0, y: 0, rotate: 0, scale: 1 });
-    gsap.set(dentado, { autoAlpha: 0 });
-    entrada.classList.remove('entrada--rota');
-  };
 }

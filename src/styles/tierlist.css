@@ -5,6 +5,11 @@
   padding: clamp(60px, 8vw, 110px) var(--borde) clamp(70px, 9vw, 120px);
 }
 
+.tierlist > * {
+  max-width: 1800px;
+  margin-inline: auto;
+}
+
 .tierlist__cabeza {
   display: flex;
   justify-content: space-between;
@@ -30,7 +35,7 @@
   background: transparent;
   padding: 16px 24px;
   font-weight: 700;
-  font-size: clamp(11px, 1vw, 14px);
+  font-size: max(var(--min-txt), clamp(11px, 1vw, 14px));
   letter-spacing: 0.12em;
   transition: background 0.25s, color 0.25s;
 }
@@ -46,7 +51,7 @@
   color: var(--papel);
   padding: 18px 34px;
   font-weight: 700;
-  font-size: clamp(11px, 1vw, 14px);
+  font-size: max(var(--min-txt), clamp(11px, 1vw, 14px));
   letter-spacing: 0.12em;
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -82,7 +87,7 @@
   background: transparent;
   color: var(--tinta);
   font-weight: 700;
-  font-size: clamp(15px, 1.7vw, 24px);
+  font-size: max(var(--min-txt), clamp(15px, 1.7vw, 24px));
   line-height: 1;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -100,7 +105,7 @@
 }
 
 .tierlist__rotulo {
-  font-size: 13px;
+  font-size: max(var(--min-txt), 13px);
   letter-spacing: 0.16em;
   margin: clamp(22px, 2.5vw, 34px) 0 14px;
 }
@@ -118,6 +123,50 @@
 
 .pozo--activo {
   background: rgba(233, 157, 37, 0.12);
+}
+
+/* ---- mandar la tierlist ---- */
+.mandar {
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: clamp(30px, 3.5vw, 50px);
+}
+
+.mandar__campo {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mandar__rotulo {
+  font-size: max(var(--min-txt), 13px);
+  letter-spacing: 0.16em;
+}
+
+.mandar__input {
+  font: 700 clamp(20px, 2vw, 30px) 'Archivo Narrow', 'Arial Narrow', Arial, sans-serif;
+  color: var(--tinta);
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid var(--tinta);
+  border-radius: 0;
+  padding: 6px 0;
+  outline: none;
+}
+
+.mandar__input:focus {
+  border-bottom-color: var(--rojo);
+}
+
+.mandar__boton {
+  flex: none;
+}
+
+.mandar__boton:disabled {
+  cursor: default;
 }
 
 .mini {
@@ -171,7 +220,7 @@
   text-align: center;
   padding: 0 6px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: max(var(--min-txt), 15px);
   line-height: 1;
   color: var(--tinta-mini);
   border-top: 2px dashed var(--tinta-mini);
@@ -202,6 +251,16 @@
 }
 
 @media (max-width: 720px) {
+  .mandar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+  }
+
+  .mandar__campo {
+    flex: none;
+  }
+
   .tierlist {
     padding: 44px 16px 50px;
   }

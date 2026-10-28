@@ -1,5 +1,5 @@
 // Ficha de un proyecto: es el panel que vive adentro del visor.
-import { dupla, proyectos } from '../data/proyectos.js';
+import { proyectos } from '../data/proyectos.js';
 import { montarReproductor } from './reproductor.js';
 import { abrirLupa } from './lupa.js';
 
@@ -19,43 +19,6 @@ function guardarEstrellas(datos) {
   } catch (e) {
     /* sin localStorage no se guarda */
   }
-}
-
-function pegatinasHTML(p) {
-  const g = p.pegatinas || {};
-  const partes = [];
-  if (g.s1) {
-    partes.push(`<span class="pegatina s1" style="background:${g.s1.bg}">${g.s1.texto}</span>`);
-  }
-  if (g.s2) {
-    const id = `anillo-${p.slug}`;
-    partes.push(`
-      <svg class="pegatina s2" viewBox="0 0 180 180" aria-hidden="true">
-        <defs><path id="${id}" d="M90,90 m-64,0 a64,64 0 1,1 128,0 a64,64 0 1,1 -128,0"></path></defs>
-        <circle cx="90" cy="90" r="87" fill="${g.s2.bg}" stroke="#1B1916" stroke-width="3"></circle>
-        <circle cx="90" cy="90" r="46" fill="none" stroke="#1B1916" stroke-width="2"></circle>
-        <text font-family="Courier Prime, monospace" font-size="14" font-weight="700" fill="#1B1916" letter-spacing="3"><textPath href="#${id}">${g.s2.anillo}</textPath></text>
-        <text x="90" y="99" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-weight="700" font-size="30" fill="#1B1916">${g.s2.centro}</text>
-      </svg>`);
-  }
-  if (g.s3) {
-    partes.push(`<span class="pegatina s3" style="background:${g.s3.bg}">${g.s3.texto.join('<br>')}</span>`);
-  }
-  if (g.s4) {
-    partes.push(`<span class="pegatina s4 mono" style="background:${g.s4.bg}">${g.s4.texto}</span>`);
-  }
-  return partes.join('');
-}
-
-function pestanasHTML(p) {
-  const tabs = [];
-  if (p.video) tabs.push({ id: 'video', texto: p.video.pestaña || 'VIDEOCASO' });
-  if (p.board) tabs.push({ id: 'board', texto: 'BOARD' });
-  if (p.piezas) tabs.push({ id: 'piezas', texto: p.piezas.pestaña });
-  tabs.push({ id: 'estrellas', texto: 'ESTRELLAS' });
-  return `<nav class="ficha__pestanas" aria-label="Secciones de la ficha">${tabs
-    .map((t, i) => `<button type="button" class="ficha__pestana${i === 0 ? ' ficha__pestana--activa' : ''}" data-ir="${t.id}">${t.texto}</button>`)
-    .join('')}</nav>`;
 }
 
 function videoHTML(p) {
@@ -84,7 +47,7 @@ function boardHTML(p) {
   return `
     <section class="ficha__seccion ficha__board" id="board-${p.slug}">
       <h3 class="ficha__rotulo adv">Board</h3>
-      <div class="board__marco"><button type="button" class="pieza" aria-label="Ver ${p.board.alt}"><img src="${p.board.img}" alt="${p.board.alt}" loading="lazy" draggable="false"></button></div>
+      <div class="board__foto"><button type="button" class="pieza" aria-label="Ver ${p.board.alt}"><img src="${p.board.img}" alt="${p.board.alt}" loading="lazy" draggable="false"></button></div>
     </section>`;
 }
 
@@ -157,16 +120,10 @@ export function fichaHTML(p) {
       <div class="panel__scroll">
         <header class="ficha__hero">
           <div class="mono ficha__meta"><span>FUNCIÓN ${p.n}</span><i></i><span>${p.marca}</span></div>
-          <div class="mono ficha__creditos">${dupla.creditos.map((c) => `<span>${c}</span>`).join('')}</div>
           <h2 class="ficha__titulo">${p.tituloLineas.join('<br>')}</h2>
           <p class="mono ficha__para">una idea para ${p.para}</p>
-          <div class="ficha__marco">
-            <span class="duo ficha__foto"><img src="${p.hero.img}" alt="${p.hero.alt}" loading="lazy" draggable="false" style="object-position:${p.hero.pos}"></span>
-            ${pegatinasHTML(p)}
-          </div>
           <p class="mono ficha__logline">${p.logline}</p>
         </header>
-        ${pestanasHTML(p)}
         ${videoHTML(p)}
         ${boardHTML(p)}
         ${piezasHTML(p)}
@@ -195,31 +152,6 @@ export function montarFicha(panel, p, { irA } = {}) {
     const im = b.querySelector('img');
     abrirLupa(im.currentSrc || im.src, im.alt);
   });
-
-  panel.querySelectorAll('[data-ir]').forEach((boton) => {
-    boton.addEventListener('click', () => {
-      const destino = panel.querySelector(`#${boton.dataset.ir}-${p.slug}`);
-      if (!destino) return;
-      scroll.scrollTo({ top: destino.offsetTop - 4, behavior: 'smooth' });
-    });
-  });
-
-  // la pestaña activa sigue a la sección que se está mirando
-  const secciones = [...panel.querySelectorAll('.ficha__seccion[id]')];
-  const pestanas = [...panel.querySelectorAll('[data-ir]')];
-  if (secciones.length && 'IntersectionObserver' in window) {
-    const obs = new IntersectionObserver(
-      (entradas) => {
-        for (const e of entradas) {
-          if (!e.isIntersecting) continue;
-          const id = e.target.id.replace(`-${p.slug}`, '');
-          pestanas.forEach((t) => t.classList.toggle('ficha__pestana--activa', t.dataset.ir === id));
-        }
-      },
-      { root: scroll, rootMargin: '-45% 0px -50% 0px' }
-    );
-    secciones.forEach((s) => obs.observe(s));
-  }
 
   const picker = panel.querySelector('.estrellas__picker');
   if (picker) {

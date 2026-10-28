@@ -2,8 +2,32 @@
 import gsap from 'gsap';
 import { proyectos, tiers } from '../data/proyectos.js';
 import { descargarTierlist } from '../lib/tierlist-png.js';
+import { aDentro } from '../lib/zoom.js';
 
 const CLAVE = 'uyg:tierlist';
+// Formspree reenvía cada tierlist por mail a la dupla. El visitante solo pone su nombre.
+const FORMSPREE = 'https://formspree.io/f/mbggyvva';
+
+function textoTierlist(estado) {
+  const lineas = tiers.map((t, i) => {
+    const titulos = proyectos.filter((p) => estado[p.slug] === i).map((p) => p.titulo);
+    return `${t.label}: ${titulos.join(', ') || '—'}`;
+  });
+  const sueltas = proyectos.filter((p) => estado[p.slug] === undefined).map((p) => p.titulo);
+  if (sueltas.length) lineas.push(`En cartel: ${sueltas.join(', ')}`);
+  return lineas.join('\n');
+}
+
+function textoEstrellas() {
+  let datos = {};
+  try {
+    datos = JSON.parse(localStorage.getItem('uyg:estrellas') || '{}');
+  } catch (e) {
+    /* sin estrellas guardadas */
+  }
+  const lineas = proyectos.filter((p) => datos[p.slug]).map((p) => `${p.titulo}: ${'★'.repeat(datos[p.slug])}`);
+  return lineas.join('\n') || '—';
+}
 
 function leerEstado() {
   try {
@@ -66,6 +90,18 @@ export function montarTierlist(seccion) {
 
     <p class="tierlist__rotulo mono">EN CARTEL</p>
     <div class="pozo" data-zona="pozo"></div>
+
+    <form class="mandar" novalidate>
+      <label class="mandar__campo">
+        <span class="mono mandar__rotulo">NOMBRE</span>
+        <input class="mandar__input" name="nombre" required autocomplete="name">
+      </label>
+      <label class="mandar__campo">
+        <span class="mono mandar__rotulo">AGENCIA / ESCUELA</span>
+        <input class="mandar__input" name="agencia" autocomplete="organization">
+      </label>
+      <button class="boton-negro muesca mandar__boton" type="submit">MANDAR MI TIERLIST →</button>
+    </form>
   `;
 
   // El arrastre es nuestro: el del navegador (la imagen fantasma) se corta acá.
@@ -112,8 +148,8 @@ export function montarTierlist(seccion) {
     if (animar && ahora && rectoAntes) {
       const rectoAhora = ahora.getBoundingClientRect();
       gsap.from(ahora, {
-        x: rectoAntes.left - rectoAhora.left,
-        y: rectoAntes.top - rectoAhora.top,
+        x: aDentro(rectoAntes.left - rectoAhora.left),
+        y: aDentro(rectoAntes.top - rectoAhora.top),
         duration: 0.45,
         ease: 'back.out(1.7)',
       });
@@ -164,8 +200,8 @@ export function montarTierlist(seccion) {
       if (!ahora) return;
       const r = ahora.getBoundingClientRect();
       gsap.from(ahora, {
-        x: antes.left - r.left,
-        y: antes.top - r.top,
+        x: aDentro(antes.left - r.left),
+        y: aDentro(antes.top - r.top),
         duration: 0.5,
         delay: i * 0.04,
         ease: 'back.out(1.6)',
@@ -214,10 +250,10 @@ export function montarTierlist(seccion) {
     arrastre.hueco = hueco;
     Object.assign(mini.style, {
       position: 'fixed',
-      left: `${rect.left}px`,
-      top: `${rect.top}px`,
-      width: `${rect.width}px`,
-      height: `${rect.height}px`,
+      left: `${aDentro(rect.left)}px`,
+      top: `${aDentro(rect.top)}px`,
+      width: `${aDentro(rect.width)}px`,
+      height: `${aDentro(rect.height)}px`,
       margin: '0',
       zIndex: '90',
     });
@@ -235,7 +271,7 @@ export function montarTierlist(seccion) {
     a.y += (a.destinoY - a.y) * 0.25;
     a.vx = a.x - antes;
     const giro = Math.max(-10, Math.min(10, a.vx * 0.7));
-    gsap.set(a.mini, { x: a.x - a.rect.left, y: a.y - a.rect.top, rotation: giro, scale: 1.08 });
+    gsap.set(a.mini, { x: aDentro(a.x - a.rect.left), y: aDentro(a.y - a.rect.top), rotation: giro, scale: 1.08 });
     requestAnimationFrame(bucle);
   }
 
@@ -329,8 +365,8 @@ export function montarTierlist(seccion) {
     const rDestino = destino.getBoundingClientRect();
     destino.style.visibility = 'hidden';
     gsap.to(mini, {
-      x: rDestino.left - a.rect.left,
-      y: rDestino.top - a.rect.top,
+      x: aDentro(rDestino.left - a.rect.left),
+      y: aDentro(rDestino.top - a.rect.top),
       rotation: 0,
       scale: 1,
       duration: 0.45,
@@ -345,6 +381,41 @@ export function montarTierlist(seccion) {
 
   seccion.addEventListener('pointerup', soltar);
   seccion.addEventListener('pointercancel', soltar);
+
+  // ---- mandar la tierlist por mail ----
+  const form = seccion.querySelector('.mandar');
+  const boton = form.querySelector('.mandar__boton');
+  const textoBoton = boton.textContent;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nombre = form.nombre.value.trim();
+    if (!nombre) {
+      form.nombre.focus();
+      gsap.fromTo(form.nombre, { x: -6 }, { x: 0, duration: 0.4, ease: 'elastic.out(1, 0.3)' });
+      return;
+    }
+    boton.disabled = true;
+    try {
+      const res = await fetch(FORMSPREE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          nombre,
+          agencia: form.agencia.value.trim(),
+          tierlist: textoTierlist(estado),
+          estrellas: textoEstrellas(),
+          _subject: `Tierlist de ${nombre}`,
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      boton.textContent = 'LLEGÓ ✓';
+      gsap.fromTo(boton, { rotate: -2, scale: 1.04 }, { rotate: 0, scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.45)' });
+    } catch (err) {
+      boton.textContent = 'NO SALIÓ, PROBÁ DE NUEVO';
+      boton.disabled = false;
+      setTimeout(() => (boton.textContent = textoBoton), 3500);
+    }
+  });
 
   pintar();
 }

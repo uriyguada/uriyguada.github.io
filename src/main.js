@@ -12,18 +12,21 @@ import { montarCartelera } from './componentes/cartelera.js';
 import { montarContacto } from './componentes/contacto.js';
 import { montarTierlist } from './componentes/tierlist.js';
 import { montarVisor } from './componentes/visor.js';
-import { prepararSonido } from './lib/sonido.js';
+import { prepararSonido, sonar } from './lib/sonido.js';
 
-let cartelera = null;
-
-const visor = montarVisor({
-  alCerrar: (slug) => cartelera && cartelera.recomponer(slug),
-});
+const visor = montarVisor();
 
 montarHero(document.getElementById('hero'));
-cartelera = montarCartelera(document.getElementById('cartelera'), {
-  alAbrir: (slug, origen) => visor.abrir(slug, origen),
+montarCartelera(document.getElementById('cartelera'), {
+  alAbrir: (slug) => visor.abrir(slug),
 });
 montarContacto(document.getElementById('entrada'));
 montarTierlist(document.getElementById('tierlist'));
 prepararSonido();
+
+// Todo lo que se toca hace click. Abrir, cerrar y pasar de proyecto tienen su propio sonido.
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('button, a');
+  if (!el || el.matches('.entrada, .visor__cerrar, [data-ir-ficha]')) return;
+  sonar('click', { volumen: 0.6 });
+});

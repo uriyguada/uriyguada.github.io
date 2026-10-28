@@ -57,17 +57,16 @@ npm run build   # dist/
 | Videocasos + reproductor A (línea) | Hecho: los 6 videos comprimidos a 1080p en `public/video/` |
 | Publicación | Hecho: **https://uriyguada.github.io/** (repo `uriyguada/uriyguada.github.io`) |
 
-### La firma
+### El logo
 
-`src/componentes/firma.js` arma "Uri & Guada" como un bloque: mide las tres partes en Roycella y
-monta el `&` sobre los dos nombres (variante horizontal para desktop y vertical para mobile, con el
-`&` sobre el troquel). La escritura es una máscara de trazos que avanza, con una pluma que va
-adelante. Con `prefers-reduced-motion` aparece de una, sin animación.
-
-La foto de Guada es `public/img/dupla/guada.png` (el PNG que estaba suelto en esa carpeta). Falta
-pasarla a JPG aclarado para duotono, como `uri.jpg`; por ahora se compensa con brillo desde el CSS.
+El hero es el logo animado que hizo Uri (`public/logo/uri-y-guada-{horizontal,vertical}.webm`, con transparencia) y "DUPLA CREATIVA". Safari e iOS no muestran la transparencia de un webm: ahí se usa la versión en WebP animado (`.webp`). Con `prefers-reduced-motion` va el SVG quieto.
 
 ### Decisiones de Uri
+
+- En escritorio la página va con `zoom: .5` (como Chrome al 50%), ver `base.css`. Ningún texto baja de 10 px en pantalla (`--min-txt`). Lo que se mide contra la ventana usa `--z` y `src/lib/zoom.js`.
+- Sin menú arriba, sin rotura de la entrada, sin flechas ni contador en el visor, sin pestañas, créditos, fotos ni pegatinas en la portada de la ficha, y el board sin marco.
+- La función 07 ahora es Rediscovering Sunsets (Corona), en lugar de Cód1gos d3 r3un10n.
+- Las tierlists llegan por mail con Formspree (`mbggyvva`): el visitante pone NOMBRE y AGENCIA / ESCUELA, y se mandan también sus estrellas.
 
 - Adentro del visor, la ficha entra al 75% (`--esc` en `visor.js`): con el tamaño de la placa
   se veía todo muy grande.

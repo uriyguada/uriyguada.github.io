@@ -1,4 +1,5 @@
 // Reproductor A (línea): el video, el círculo de play y una barra fina abajo.
+const GRANDE = `<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7V2h5M13 2h5v5M18 13v5h-5M7 18H2v-5"/></svg>`;
 const PLAY = `<svg viewBox="0 0 40 40" width="28" height="28" aria-hidden="true"><path d="M14 9.5 31 20 14 30.5z" fill="currentColor"/></svg>`;
 
 function reloj(seg) {
@@ -18,7 +19,10 @@ export function montarReproductor(caja) {
       <div class="repro__barra">
         <div class="mono repro__fila">
           <span>FUNCIÓN ${n} · ${titulo}</span>
-          <span class="repro__tiempo">00:00 / ${dur}</span>
+          <span class="repro__fin">
+            <span class="repro__tiempo">00:00 / ${dur}</span>
+            <button type="button" class="repro__grande" aria-label="Pantalla completa">${GRANDE}</button>
+          </span>
         </div>
         <div class="repro__linea" role="slider" tabindex="0" aria-label="Avance del video"
              aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="repro__avance"></span></div>
@@ -56,10 +60,17 @@ export function montarReproductor(caja) {
 
   play.addEventListener('click', alternar);
   video.addEventListener('click', alternar);
-  video.addEventListener('dblclick', () => {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else repro.requestFullscreen?.();
-  });
+  function pantallaCompleta() {
+    if (document.fullscreenElement) return document.exitFullscreen();
+    if (repro.requestFullscreen) return repro.requestFullscreen();
+    // iPhone: solo el video puede ir a pantalla completa
+    if (video.webkitEnterFullscreen) {
+      cargar();
+      video.webkitEnterFullscreen();
+    }
+  }
+  video.addEventListener('dblclick', pantallaCompleta);
+  caja.querySelector('.repro__grande').addEventListener('click', pantallaCompleta);
 
   video.addEventListener('play', () => repro.classList.add('repro--andando'));
   video.addEventListener('pause', () => {

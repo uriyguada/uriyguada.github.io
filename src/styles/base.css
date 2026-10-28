@@ -12,6 +12,20 @@
   --dorado:#E99D25;
   --gris:#B9AF9C;
   --borde:min(80px, 5.5vw);
+  --z:1;
+  /* piso de legibilidad: 10 px en pantalla, haya zoom o no */
+  --min-txt:calc(10px / var(--z));
+}
+
+/* En escritorio todo va más chico, como Chrome al 50%. --z acompaña al zoom
+   para lo que se mide contra la ventana (vh) y para el JS. */
+@media (min-width:1024px){
+  html{zoom:.6}
+  :root{--z:.6}
+}
+@media (min-width:1280px){
+  html{zoom:.5}
+  :root{--z:.5}
 }
 
 *{box-sizing:border-box}
@@ -104,7 +118,7 @@ img{display:block;-webkit-user-drag:none;user-drag:none}
   position:relative;z-index:2;
   background:var(--tinta);color:var(--gris);
   padding:28px var(--borde);
-  font-size:12px;letter-spacing:.14em;
+  font-size:max(var(--min-txt), 12px);letter-spacing:.14em;
 }
 
 @media (max-width:720px){

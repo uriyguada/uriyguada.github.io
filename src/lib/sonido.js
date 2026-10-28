@@ -1,35 +1,15 @@
-// Sonido de papel de la rotura. Se decodifica una sola vez con Web Audio
-// para que no haya latencia al tocar una entrada.
-const CLAVE = 'uyg:sonido';
-const ARCHIVOS = ['/sound/ticket-rotura.webm', '/sound/ticket-rotura-2.webm', '/sound/ticket-rotura-3.webm'];
-const RESPALDO = ['/sound/ticket-rotura.mp3', '/sound/ticket-rotura-2.mp3', '/sound/ticket-rotura-3.mp3'];
+// Sonidos de la web: abrir y cerrar un proyecto, pasar al siguiente y los clicks.
+// Se decodifican una sola vez con Web Audio para que no haya latencia.
+const ARCHIVOS = {
+  abrir: ['/sound/abrir.mp3'],
+  cerrar: ['/sound/cerrar.mp3'],
+  pasar: ['/sound/pasar.mp3'],
+  click: ['/sound/click-2.mp3', '/sound/click-3.mp3', '/sound/click-4.mp3'],
+};
 
 let contexto = null;
 let buffers = null;
 let cargando = null;
-
-export function estaSilenciado() {
-  try {
-    return localStorage.getItem(CLAVE) === 'mudo';
-  } catch (e) {
-    return false;
-  }
-}
-
-export function alternarSilencio() {
-  const mudo = !estaSilenciado();
-  try {
-    localStorage.setItem(CLAVE, mudo ? 'mudo' : 'con');
-  } catch (e) {
-    /* sin localStorage se queda en la sesión */
-  }
-  return mudo;
-}
-
-function soportaWebm() {
-  const a = document.createElement('audio');
-  return a.canPlayType('audio/webm') !== '';
-}
 
 async function cargar() {
   if (buffers) return buffers;
@@ -37,23 +17,20 @@ async function cargar() {
   const Ctx = window.AudioContext || window.webkitAudioContext;
   if (!Ctx) return null;
   contexto = contexto || new Ctx();
-  const lista = soportaWebm() ? ARCHIVOS : RESPALDO;
-  cargando = Promise.all(
-    lista.map(async (url) => {
-      const res = await fetch(url);
-      const datos = await res.arrayBuffer();
-      return contexto.decodeAudioData(datos);
-    })
-  )
-    .then((bs) => {
-      buffers = bs;
-      return bs;
-    })
-    .catch(() => null);
+  cargando = (async () => {
+    const res = {};
+    for (const [nombre, urls] of Object.entries(ARCHIVOS)) {
+      res[nombre] = await Promise.all(
+        urls.map(async (url) => contexto.decodeAudioData(await (await fetch(url)).arrayBuffer()))
+      );
+    }
+    buffers = res;
+    return res;
+  })().catch(() => null);
   return cargando;
 }
 
-// Se llama en el primer gesto: deja el contexto listo y los sonidos decodificados.
+// Los navegadores no dejan sonar nada antes del primer gesto: ahí se prepara todo.
 export function prepararSonido() {
   const arranque = () => {
     cargar().then(() => {
@@ -64,16 +41,15 @@ export function prepararSonido() {
   window.addEventListener('keydown', arranque, { once: true });
 }
 
-export async function sonarRotura() {
-  if (estaSilenciado()) return;
+export async function sonar(nombre, { volumen = 0.8 } = {}) {
   const bs = await cargar();
-  if (!bs || !contexto) return;
+  if (!bs || !contexto || !bs[nombre]) return;
   if (contexto.state === 'suspended') await contexto.resume();
+  const lista = bs[nombre];
   const fuente = contexto.createBufferSource();
-  fuente.buffer = bs[Math.floor(Math.random() * bs.length)];
-  fuente.playbackRate.value = 0.92 + Math.random() * 0.16;
+  fuente.buffer = lista[Math.floor(Math.random() * lista.length)];
   const ganancia = contexto.createGain();
-  ganancia.gain.value = 0.8;
+  ganancia.gain.value = volumen;
   fuente.connect(ganancia).connect(contexto.destination);
   fuente.start();
 }
