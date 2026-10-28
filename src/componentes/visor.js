@@ -6,7 +6,6 @@ import { fichaHTML, montarFicha } from './ficha.js';
 import { sonar } from '../lib/sonido.js';
 import { zoomActual } from '../lib/zoom.js';
 
-const SEPARACION = 40;
 
 export function montarVisor() {
   const visor = document.createElement('div');
@@ -25,6 +24,7 @@ export function montarVisor() {
   let i = 0;
   let abierto = false;
   let ancho = 0;
+  let separacion = 40;
 
   paneles.forEach((panel, k) => {
     montarFicha(panel, proyectos[k], { irA: (slug) => irA(slug) });
@@ -38,14 +38,16 @@ export function montarVisor() {
 
   function medir() {
     const w = anchoVentana();
-    ancho = window.innerWidth <= 720 ? w - 24 : Math.min(1180, w - 260);
+    ancho = window.innerWidth <= 720 ? w - 44 : Math.min(1180, w - 260);
+    // la separación sale del CSS (cambia en mobile): si no coincide, cada ficha queda más corrida
+    separacion = parseFloat(getComputedStyle(pista).columnGap) || 0;
     visor.style.setProperty('--panel-ancho', `${ancho}px`);
     // todo lo de adentro de la ficha se mide contra el panel, no contra la ventana
     visor.style.setProperty('--esc', ((ancho / 1180) * 0.75).toFixed(3));
     colocar(false);
   }
 
-  const base = () => anchoVentana() / 2 - ancho / 2 - i * (ancho + SEPARACION);
+  const base = () => anchoVentana() / 2 - ancho / 2 - i * (ancho + separacion);
 
   function colocar(conTransicion = true) {
     pista.style.transition = conTransicion && !reducido() ? '' : 'none';

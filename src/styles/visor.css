@@ -131,20 +131,22 @@ body.con-visor {
   background: var(--rojo);
 }
 
+/* En el iPhone el visor llega hasta debajo de la hora y de la barra de Safari
+   (viewport-fit=cover); el contenido se corre lo que ocupan. */
 @media (max-width: 720px) {
   .visor__pista {
-    top: 52px;
-    gap: 16px;
+    top: calc(52px + env(safe-area-inset-top, 0px));
+    gap: 14px;
   }
 
   .panel {
-    height: calc(100vh - 64px);
-    height: calc(100dvh - 64px);
+    height: calc(100vh - 64px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    height: calc(100dvh - 64px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     border-radius: 20px;
   }
 
   .visor__cerrar {
-    right: 10px;
-    top: 10px;
+    right: 14px;
+    top: calc(10px + env(safe-area-inset-top, 0px));
   }
 }

@@ -25,7 +25,7 @@ function textoEstrellas() {
   } catch (e) {
     /* sin estrellas guardadas */
   }
-  const lineas = proyectos.filter((p) => datos[p.slug]).map((p) => `${p.titulo}: ${'★'.repeat(datos[p.slug])}`);
+  const lineas = proyectos.filter((p) => datos[p.slug]).map((p) => `${p.titulo}: ${'★'.repeat(Math.floor(datos[p.slug]))}${datos[p.slug] % 1 ? '½' : ''} (${String(datos[p.slug]).replace('.', ',')})`);
   return lineas.join('\n') || '—';
 }
 

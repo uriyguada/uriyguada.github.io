@@ -34,7 +34,7 @@ function videoHTML(p) {
     : '';
   return `
     <section class="ficha__seccion ficha__video" id="video-${p.slug}">
-      <h3 class="ficha__rotulo adv">${p.video.rotulo || 'Videocaso'}</h3>
+      <h3 class="ficha__rotulo">${p.video.rotulo || 'Videocaso'}</h3>
       <div class="reproductor" data-video="${p.video.archivo}" data-poster="${p.video.poster}"
            data-alt="${p.video.alt}" data-dur="${p.video.dur}" data-n="${p.n}" data-titulo="${p.titulo}"
            style="--color:${p.color}"></div>
@@ -46,7 +46,7 @@ function boardHTML(p) {
   if (!p.board) return '';
   return `
     <section class="ficha__seccion ficha__board" id="board-${p.slug}">
-      <h3 class="ficha__rotulo adv">Board</h3>
+      <h3 class="ficha__rotulo">Board</h3>
       <div class="board__foto"><button type="button" class="pieza" aria-label="Ver ${p.board.alt}"><img src="${p.board.img}" alt="${p.board.alt}" loading="lazy" draggable="false"></button></div>
     </section>`;
 }
@@ -71,17 +71,32 @@ function piezasHTML(p) {
   }
   return `
     <section class="ficha__seccion ficha__piezas" id="piezas-${p.slug}" style="background:${z.fondo}">
-      <h3 class="ficha__rotulo adv" style="color:${z.tituloColor}">${z.titulo}</h3>
+      <h3 class="ficha__rotulo" style="color:${z.tituloColor}">${z.titulo}</h3>
       ${cuerpo}
     </section>`;
 }
 
+// cuánto se pinta la estrella n (0, la mitad o entera) para una calificación v
+function rellenoDe(n, v) {
+  if (v >= n) return '1';
+  if (v >= n - 0.5) return '0.5';
+  return '0';
+}
+
 function estrellasHTML(p) {
   const mias = leerEstrellas()[p.slug] || 0;
+  const nombre = (v) => `${String(v).replace('.', ',')} ${v === 1 ? 'estrella' : 'estrellas'}`;
   const picker = [1, 2, 3, 4, 5]
     .map(
-      (n) =>
-        `<button type="button" role="radio" aria-checked="${n === mias}" aria-label="${n} ${n === 1 ? 'estrella' : 'estrellas'}" data-estrella="${n}" class="estrella${n <= mias ? ' estrella--puesta' : ''}">★</button>`
+      (n) => `
+        <span class="estrella" style="--relleno:${rellenoDe(n, mias)}">
+          <span class="estrella__vacia" aria-hidden="true">★</span>
+          <span class="estrella__llena" aria-hidden="true">★</span>
+          <button type="button" role="radio" class="estrella__mitad estrella__mitad--izq" data-estrella="${n - 0.5}"
+                  aria-checked="${mias === n - 0.5}" aria-label="${nombre(n - 0.5)}"></button>
+          <button type="button" role="radio" class="estrella__mitad estrella__mitad--der" data-estrella="${n}"
+                  aria-checked="${mias === n}" aria-label="${nombre(n)}"></button>
+        </span>`
     )
     .join('');
   return `
@@ -164,10 +179,12 @@ export function montarFicha(panel, p, { irA } = {}) {
       const datos = leerEstrellas();
       datos[p.slug] = n;
       guardarEstrellas(datos);
+      picker.querySelectorAll('[data-estrella]').forEach((m) =>
+        m.setAttribute('aria-checked', String(Number(m.dataset.estrella) === n))
+      );
       [...picker.children].forEach((hijo, k) => {
-        hijo.classList.toggle('estrella--puesta', k < n);
-        hijo.setAttribute('aria-checked', String(k + 1 === n));
-        if (k < n) {
+        hijo.style.setProperty('--relleno', rellenoDe(k + 1, n));
+        if (k < Math.ceil(n)) {
           hijo.animate(
             [{ transform: 'scale(1)' }, { transform: 'scale(1.25)' }, { transform: 'scale(1)' }],
             { duration: 320, delay: k * 45, easing: 'cubic-bezier(.2,.8,.2,1)' }
