@@ -87,7 +87,13 @@
   letter-spacing: 0.1em;
 }
 
+.entrada__meta span:first-child {
+  flex: none;
+  white-space: nowrap;
+}
+
 .entrada__meta span:last-child {
+  min-width: 0;
   text-align: right;
 }
 

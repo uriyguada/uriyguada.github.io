@@ -13,7 +13,8 @@ export function montarVisor() {
   visor.className = 'visor';
   visor.hidden = true;
   visor.innerHTML = `
-    <div class="visor__pista">${proyectos.map(fichaHTML).join('')}</div>
+    <div class="visor__fondo"></div>
+    <div class="visor__escena"><div class="visor__pista">${proyectos.map(fichaHTML).join('')}</div></div>
     <button type="button" class="visor__cerrar" aria-label="Cerrar"><span></span><span></span></button>`;
   document.body.append(visor);
 

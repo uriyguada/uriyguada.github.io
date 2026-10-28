@@ -270,7 +270,9 @@ export const proyectos = [
     marca: 'CORONA',
     marcaTicket: 'CORONA',
     para: 'Corona',
-    color: '#EBC54C', tinta: '#1F3A8A', heroBg: '#1F3A8A',
+    // los colores del atardecer: del azul de la noche al naranja del sol
+    color: '#F2956B', tinta: '#2A2F6E',
+    heroBg: 'linear-gradient(165deg, #2A2F6E 0%, #66338E 36%, #B53D78 68%, #E0613F 100%)',
     ticket: { img: '/img/corona/poster-video.jpg', pos: '50% 50%', rot: 1 },
     hero: { img: '/img/corona/poster-video.jpg', alt: 'Cartel de Corona frente al mar al atardecer', pos: '50% 50%' },
     pegatinas: {},

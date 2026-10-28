@@ -2,8 +2,22 @@
   position: fixed;
   inset: 0;
   z-index: 70;
-  background: var(--sala);
   overflow: hidden;
+}
+
+/* el fondo es vidrio: la página se ve detrás, esmerilada. No se mueve, así el desenfoque
+   se calcula una sola vez; lo que sube y baja es la escena con las fichas. */
+.visor__fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 18, 16, 0.42);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+          backdrop-filter: blur(22px) saturate(1.3);
+}
+
+.visor__escena {
+  position: absolute;
+  inset: 0;
   transform: translateY(0);
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform;
@@ -14,12 +28,12 @@
 }
 
 /* abre subiendo desde abajo y cierra bajando: una sola pieza, sin fundidos */
-.visor--subiendo {
+.visor--subiendo .visor__escena {
   transform: translateY(100%);
   transition: none;
 }
 
-.visor--bajando {
+.visor--bajando .visor__escena {
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.6, 0, 0.8, 0.4);
 }

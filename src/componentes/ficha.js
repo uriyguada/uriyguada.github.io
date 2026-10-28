@@ -121,8 +121,10 @@ export function fichaHTML(p) {
         <header class="ficha__hero">
           <div class="mono ficha__meta"><span>FUNCIÓN ${p.n}</span><i></i><span>${p.marca}</span></div>
           <h2 class="ficha__titulo">${p.tituloLineas.join('<br>')}</h2>
-          <p class="mono ficha__para">una idea para ${p.para}</p>
-          <p class="mono ficha__logline">${p.logline}</p>
+          <div class="ficha__pie">
+            <p class="mono ficha__para">una idea para ${p.para}</p>
+            <p class="ficha__logline">${p.logline}</p>
+          </div>
         </header>
         ${videoHTML(p)}
         ${boardHTML(p)}

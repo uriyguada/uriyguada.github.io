@@ -1,13 +1,16 @@
-/* ---- hero de la ficha ---- */
+/* ---- portada de la ficha ----
+   No ocupa todo el panel: abajo asoma el videocaso.
+   Título grande alineado a la izquierda y un pie de dos columnas:
+   a quién va la idea, y la sinopsis. */
 .ficha__hero {
   position: relative;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+  min-height: 64%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   cursor: pointer;
   background: var(--heroBg);
   color: #f4e9d6;
-  padding: max(18px, calc(46px * var(--esc, 1))) max(16px, calc(70px * var(--esc, 1))) max(32px, calc(90px * var(--esc, 1)));
+  padding: max(18px, calc(46px * var(--esc, 1))) max(16px, calc(70px * var(--esc, 1))) max(24px, calc(56px * var(--esc, 1)));
 }
 
 .ficha__meta {
@@ -22,34 +25,41 @@
   flex: 1;
   height: 1px;
   background: currentColor;
+  opacity: 0.5;
 }
 
-
 .ficha__titulo {
-  text-align: center;
-  font-size: calc(var(--fs-titulo, 170px) * var(--esc, 1));
-  line-height: 0.86;
+  align-self: end;
+  text-align: left;
+  font-size: calc(var(--fs-titulo, 170px) * var(--esc, 1) * 1.25);
+  line-height: 0.84;
   letter-spacing: -0.03em;
-  margin-top: auto;
+  margin: max(28px, calc(70px * var(--esc, 1))) 0 0;
+}
+
+.ficha__pie {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: max(16px, calc(40px * var(--esc, 1)));
+  align-items: start;
+  margin-top: max(18px, calc(40px * var(--esc, 1)));
+  padding-top: max(12px, calc(22px * var(--esc, 1)));
+  border-top: 2px solid currentColor;
 }
 
 .ficha__para {
-  text-align: center;
-  font-size: max(var(--min-txt), max(11px, calc(22px * var(--esc, 1))));
-  margin: 8px 0 0;
+  margin: 0;
+  font-size: max(var(--min-txt), max(11px, calc(18px * var(--esc, 1))));
+  letter-spacing: 0.04em;
 }
 
-
-
 .ficha__logline {
-  text-align: center;
-  font-size: max(var(--min-txt), max(12px, calc(22px * var(--esc, 1))));
-  line-height: 1.5;
-  letter-spacing: 0.06em;
-  font-weight: 700;
-  max-width: 1000px;
-  margin: auto auto 0;
-  padding-top: max(30px, calc(60px * var(--esc, 1)));
+  margin: 0;
+  max-width: 34ch;
+  font-size: max(calc(var(--min-txt) * 1.6), max(16px, calc(46px * var(--esc, 1))));
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.005em;
 }
 
 /* ---- secciones ---- */
@@ -382,6 +392,15 @@
 }
 
 @media (max-width: 720px) {
+  .ficha__hero {
+    min-height: 72%;
+  }
+
+  .ficha__pie {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
   .tira__fotos {
     grid-auto-flow: column;
     grid-auto-columns: 46%;
