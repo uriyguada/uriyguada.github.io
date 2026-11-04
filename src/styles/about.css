@@ -300,67 +300,46 @@ body.con-about {
   }
 }
 
-/* ---- barra de arriba ---- */
+/* ---- barra de arriba: chiquita, sobre el hero, se va con el scroll ---- */
 .barra {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 60;
+  z-index: 3;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  height: calc(52px + env(safe-area-inset-top, 0px));
-  padding: env(safe-area-inset-top, 0px) 16px 0;
-  background: rgba(20, 18, 16, 0.55);
-  -webkit-backdrop-filter: blur(16px) saturate(1.3);
-          backdrop-filter: blur(16px) saturate(1.3);
-  color: var(--papel);
-}
-
-.barra__marca {
-  font-size: 26px;
-  line-height: 1;
-  padding-top: 4px;
-}
-
-.barra__link {
-  padding: 10px 0 10px 12px;
-  font-size: 12px;
-  font-weight: 700;
+  flex-wrap: wrap;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 0;
+  font-size: 10px;
   letter-spacing: 0.16em;
+  color: var(--gris);
 }
 
-.barra__link:hover {
-  color: var(--dorado);
+.barra a {
+  padding: 8px 0;
+  transition: color 0.2s ease;
+}
+
+.barra a + a::before {
+  content: '|';
+  margin: 0 10px;
+  color: #6e665a;
+}
+
+.barra a:hover {
+  color: var(--papel);
 }
 
 @media (min-width: 721px) {
   .barra {
-    height: 76px;
-    padding: 0 var(--borde);
+    padding: 26px var(--borde) 0;
+    font-size: max(var(--min-txt), 12px);
   }
 
-  .barra__marca {
-    font-size: 40px;
-  }
-
-  .barra__link {
-    font-size: max(var(--min-txt), 14px);
-  }
-}
-
-@media (min-width: 1024px) {
-  .barra {
-    height: 104px;
-  }
-
-  .barra__marca {
-    font-size: 60px;
-  }
-
-  .barra__link {
-    font-size: max(var(--min-txt), 22px);
+  .barra a + a::before {
+    margin: 0 16px;
   }
 }
 
