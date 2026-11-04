@@ -15,7 +15,7 @@ export const about = [
       { img: '/img/about/uri-selfie.jpg', alt: 'Selfie de Uri con anteojos de sol',               pos: '50% 40%' },
       { img: '/img/about/uri-trofeo.jpg', alt: 'Uri con un trofeo',                               pos: '50% 30%' },
       { img: '/img/about/uri-charla.jpg', alt: 'Uri dando una charla en la Universidad de Palermo', pos: '35% 50%' },
-      { img: '/img/about/uri-libro.jpg',  alt: 'Uri con un libro abierto',                        pos: '50% 55%' },
+      { img: '/img/about/uri-libro.jpg',  alt: 'Uri con un libro',                                pos: '62% 50%' },
     ],
     texto: [
       'Soy Uri. Tengo 24 años, soy diseñador multimedial y director de arte.',
