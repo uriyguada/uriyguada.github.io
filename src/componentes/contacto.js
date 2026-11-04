@@ -38,6 +38,9 @@ export function montarContacto(seccion) {
         <span class="codigo-barras contacto__barras"></span>
       </div>
     </div>
+    <div class="contacto__mas">
+      <button type="button" class="boton-papel muesca mono" data-abrir-about>DETRÁS DE ESCENA →</button>
+    </div>
   `;
 
   const talon = seccion.querySelector('.contacto__talon');

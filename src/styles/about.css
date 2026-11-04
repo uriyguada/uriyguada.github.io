@@ -1,0 +1,407 @@
+/* About: mobile primero. La ventana es del mismo vidrio que el visor;
+   en escritorio todo se mide contra el ancho de la ventana (cqw), como la placa de 1440. */
+
+.about {
+  position: fixed;
+  inset: 0;
+  z-index: 72;
+  overflow: hidden;
+}
+
+.about[hidden] {
+  display: none;
+}
+
+body.con-about {
+  overflow: hidden;
+}
+
+.about__fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 18, 16, 0.42);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+          backdrop-filter: blur(22px) saturate(1.3);
+}
+
+.about__escena {
+  position: absolute;
+  inset: 0;
+  transform: translateY(0);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.about--subiendo .about__escena {
+  transform: translateY(100%);
+  transition: none;
+}
+
+.about--bajando .about__escena {
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.6, 0, 0.8, 0.4);
+}
+
+.about__ventana {
+  position: absolute;
+  top: calc(52px + env(safe-area-inset-top, 0px));
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--sala);
+  color: var(--papel);
+  container-type: inline-size;
+}
+
+.about__scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  outline: none;
+}
+
+.about__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.about__cerrar {
+  right: 14px;
+  top: calc(10px + env(safe-area-inset-top, 0px));
+}
+
+/* ---- perfil ---- */
+.perfil {
+  padding: 44px 0 52px;
+}
+
+.perfil + .perfil {
+  border-top: 2px solid #2e2a25;
+}
+
+.perfil__nombre {
+  padding: 0 22px;
+  font-size: 104px;
+  line-height: 0.8;
+  color: var(--color);
+}
+
+/* ---- tira de negativo ---- */
+.rollo {
+  margin-top: 34px;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  background: #0a0908;
+  transform: translateX(var(--corrida, 0px)) rotate(-1deg);
+}
+
+/* en mobile la tira se pasa con el dedo, cuadro por cuadro, y asoma el siguiente */
+.rollo__tira {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 34px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rollo__tira::-webkit-scrollbar {
+  display: none;
+}
+
+.rollo__pista {
+  width: max-content;
+  min-width: 100%;
+}
+
+.rollo__perf {
+  height: 26px;
+  background-image: radial-gradient(ellipse 8px 5px at 50% 50%, #eee6d3 98%, #0000);
+  background-size: 24px 26px;
+  background-position: center;
+}
+
+.rollo__cuadros {
+  display: flex;
+  gap: 10px;
+  padding: 0 34px;
+}
+
+.rollo__cuadro {
+  flex: none;
+  width: 200px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  scroll-snap-align: start;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s ease;
+}
+
+/* el revelado anima el filtro de la foto; el brillo del hover va en el cuadro para no pisarse */
+.rollo__foto {
+  display: block;
+  height: 150px;
+  background: var(--color);
+}
+
+.rollo__foto img {
+  -webkit-user-select: none;
+          user-select: none;
+}
+
+.rollo__numero {
+  font-size: 11px;
+  color: var(--dorado);
+  letter-spacing: 0.1em;
+}
+
+@media (hover: hover) {
+  .rollo__cuadro:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.12);
+  }
+}
+
+/* ---- texto ---- */
+.perfil__texto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 40px 22px 0;
+}
+
+.perfil__col p {
+  margin: 0 0 14px;
+  font-size: 17px;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.estudios {
+  margin-top: 28px;
+  font-size: 14px;
+}
+
+.estudios__rotulo {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  margin-bottom: 10px;
+}
+
+/* el título arriba y la institución abajo: así no se aprietan, ni en mobile ni con el piso de 10 px */
+.estudios__fila {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 11px 0;
+  border-top: 1.5px dashed #6e665a;
+}
+
+.estudios__fila:last-child {
+  border-bottom: 1.5px dashed #6e665a;
+}
+
+.estudios__fila span {
+  color: var(--gris);
+}
+
+/* ---- escritorio: la placa de 1440, medida contra la ventana ---- */
+@media (min-width: 721px) {
+  .about__ventana {
+    top: 44px;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    width: min(1440px, calc(100vw / var(--z, 1) - 200px));
+    height: calc(100vh / var(--z, 1) - 88px);
+    transform: translateX(-50%);
+    border-radius: 28px;
+  }
+
+  .about__cerrar {
+    right: 22px;
+    top: 6px;
+  }
+
+  .perfil {
+    padding: 6.9cqw 0 7.6cqw;
+  }
+
+  .perfil__nombre {
+    padding: 0 6.9cqw;
+    font-size: 13.9cqw;
+  }
+
+  .rollo {
+    margin-top: 3.5cqw;
+    width: 104.2cqw;
+    margin-left: -2.1cqw;
+  }
+
+  .rollo__tira {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .rollo__pista {
+    width: 100%;
+  }
+
+  .rollo__perf {
+    height: 30px;
+    background-image: radial-gradient(ellipse 9px 6px at 50% 50%, #eee6d3 98%, #0000);
+    background-size: 28px 30px;
+  }
+
+  .rollo__cuadros {
+    gap: 1cqw;
+    padding: 0 3.5cqw;
+  }
+
+  .rollo__cuadro {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+  }
+
+  .rollo__foto {
+    height: 16cqw;
+  }
+
+  .rollo__numero {
+    font-size: max(var(--min-txt), 11px);
+  }
+
+  .perfil__texto {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4.9cqw;
+    padding: 4.9cqw 6.9cqw 0;
+  }
+
+  .perfil__col p {
+    margin-bottom: 16px;
+    font-size: max(calc(var(--min-txt) * 1.2), 1.6cqw);
+  }
+
+  .estudios {
+    margin-top: 30px;
+    font-size: max(var(--min-txt), 1.1cqw);
+  }
+
+  .estudios__rotulo {
+    font-size: max(var(--min-txt), 12px);
+  }
+
+  .estudios__fila {
+    padding: 12px 0;
+  }
+}
+
+/* ---- barra de arriba ---- */
+.barra {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(52px + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) 16px 0;
+  background: rgba(20, 18, 16, 0.55);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+          backdrop-filter: blur(16px) saturate(1.3);
+  color: var(--papel);
+}
+
+.barra__marca {
+  font-size: 26px;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.barra__link {
+  padding: 10px 0 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.barra__link:hover {
+  color: var(--dorado);
+}
+
+@media (min-width: 721px) {
+  .barra {
+    height: 76px;
+    padding: 0 var(--borde);
+  }
+
+  .barra__marca {
+    font-size: 40px;
+  }
+
+  .barra__link {
+    font-size: max(var(--min-txt), 14px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .barra {
+    height: 104px;
+  }
+
+  .barra__marca {
+    font-size: 60px;
+  }
+
+  .barra__link {
+    font-size: max(var(--min-txt), 22px);
+  }
+}
+
+/* ---- botón de abajo del contacto ---- */
+.contacto__mas {
+  display: flex;
+  justify-content: center;
+  max-width: 1800px;
+  margin: 28px auto 0;
+}
+
+.boton-papel {
+  border: 0;
+  width: 100%;
+  background: var(--papel);
+  color: var(--tinta);
+  padding: 18px 34px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.boton-papel:hover {
+  transform: translateY(-3px);
+}
+
+@media (min-width: 721px) {
+  .contacto__mas {
+    margin-top: clamp(30px, 3vw, 48px);
+  }
+
+  .boton-papel {
+    width: auto;
+    padding: 30px 84px;
+    font-size: max(var(--min-txt), 24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rollo {
+    transform: rotate(-1deg);
+  }
+}
