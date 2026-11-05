@@ -128,11 +128,17 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0 clamp(16px, 2.5vw, 36px) clamp(16px, 2.5vw, 36px);
+  padding: 70px clamp(16px, 2.5vw, 36px) clamp(4px, 0.6vw, 10px);
   background: linear-gradient(to top, rgba(10, 9, 8, 0.75), rgba(10, 9, 8, 0) 100%);
-  padding-top: 70px;
+  pointer-events: none;
   transform: translateY(0);
   transition: transform 0.35s cubic-bezier(0.65, 0, 0.2, 1);
+}
+
+/* el degradé deja pasar los toques al video; solo responden los controles */
+.repro__fin,
+.repro__linea {
+  pointer-events: auto;
 }
 
 .repro--quieta .repro__barra {
@@ -146,7 +152,6 @@
   color: var(--papel);
   font-size: max(var(--min-txt), clamp(10px, 0.9vw, 13px));
   letter-spacing: 0.1em;
-  margin-bottom: 10px;
 }
 
 .repro__fin {
@@ -176,18 +181,54 @@
   height: 100%;
 }
 
+/* La línea se ve gruesa y se agarra de mucho más lejos: la zona de toque ocupa 36 px en pantalla
+   (44 en el celular) aunque el riel mida 6. Se divide por --z para que el zoom no la achique. */
 .repro__linea {
-  height: 2px;
-  background: rgba(238, 230, 211, 0.35);
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: calc(36px / var(--z, 1));
   cursor: pointer;
   touch-action: none;
+}
+
+.repro__riel {
+  display: block;
+  width: 100%;
+  height: calc(6px / var(--z, 1));
+  border-radius: calc(3px / var(--z, 1));
+  overflow: hidden;
+  background: rgba(238, 230, 211, 0.35);
+  transition: height 0.15s ease;
 }
 
 .repro__avance {
   display: block;
   height: 100%;
-  width: 0;
+  width: var(--avance, 0%);
   background: var(--color);
+}
+
+.repro__perilla {
+  position: absolute;
+  left: var(--avance, 0%);
+  top: 50%;
+  width: calc(16px / var(--z, 1));
+  height: calc(16px / var(--z, 1));
+  margin: calc(-8px / var(--z, 1)) 0 0 calc(-8px / var(--z, 1));
+  border-radius: 50%;
+  background: var(--papel);
+  transition: transform 0.15s ease;
+}
+
+.repro__linea:hover .repro__riel,
+.repro--arrastrando .repro__riel {
+  height: calc(9px / var(--z, 1));
+}
+
+.repro__linea:hover .repro__perilla,
+.repro--arrastrando .repro__perilla {
+  transform: scale(1.25);
 }
 
 /* ---- tira de fílmico ---- */
@@ -430,6 +471,10 @@
 }
 
 @media (max-width: 720px) {
+  .repro__linea {
+    height: 44px;
+  }
+
   .ficha__hero {
     min-height: 72%;
   }

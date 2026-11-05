@@ -1,4 +1,4 @@
-// Reproductor A (línea): el video, el círculo de play y una barra fina abajo.
+// Reproductor A (línea): el video, el círculo de play y una línea de tiempo cómoda de agarrar.
 const GRANDE = `<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7V2h5M13 2h5v5M18 13v5h-5M7 18H2v-5"/></svg>`;
 const PLAY = `<svg viewBox="0 0 40 40" width="28" height="28" aria-hidden="true"><path d="M14 9.5 31 20 14 30.5z" fill="currentColor"/></svg>`;
 
@@ -25,7 +25,7 @@ export function montarReproductor(caja) {
           </span>
         </div>
         <div class="repro__linea" role="slider" tabindex="0" aria-label="Avance del video"
-             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="repro__avance"></span></div>
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="repro__riel"><span class="repro__avance"></span></span><span class="repro__perilla"></span></div>
       </div>
     </div>`;
 
@@ -33,13 +33,14 @@ export function montarReproductor(caja) {
   const video = caja.querySelector('.repro__video');
   const play = caja.querySelector('.repro__play');
   const linea = caja.querySelector('.repro__linea');
-  const avance = caja.querySelector('.repro__avance');
   const tiempo = caja.querySelector('.repro__tiempo');
 
   let cargado = false;
+  let arrastrando = false;
   function cargar() {
     if (cargado) return;
     cargado = true;
+    video.preload = 'metadata';
     const fuente = document.createElement('source');
     fuente.src = archivo;
     fuente.type = 'video/mp4';
@@ -59,7 +60,13 @@ export function montarReproductor(caja) {
   }
 
   play.addEventListener('click', alternar);
-  video.addEventListener('click', alternar);
+  // En el celular, si la barra está escondida, el primer toque solo la muestra.
+  let puntero = 'mouse';
+  repro.addEventListener('pointerdown', (e) => (puntero = e.pointerType), true);
+  video.addEventListener('click', () => {
+    if (puntero !== 'mouse' && repro.classList.contains('repro--quieta')) despertar();
+    else alternar();
+  });
   function pantallaCompleta() {
     if (document.fullscreenElement) return document.exitFullscreen();
     if (repro.requestFullscreen) return repro.requestFullscreen();
@@ -72,17 +79,24 @@ export function montarReproductor(caja) {
   video.addEventListener('dblclick', pantallaCompleta);
   caja.querySelector('.repro__grande').addEventListener('click', pantallaCompleta);
 
-  video.addEventListener('play', () => repro.classList.add('repro--andando'));
+  video.addEventListener('play', () => {
+    repro.classList.add('repro--andando');
+    despertar();
+  });
   video.addEventListener('pause', () => {
     repro.classList.remove('repro--andando');
     repro.classList.remove('repro--quieta');
   });
 
-  video.addEventListener('timeupdate', () => {
-    const p = video.duration ? (video.currentTime / video.duration) * 100 : 0;
-    avance.style.width = `${p}%`;
+  function pintar(fraccion) {
+    const p = fraccion * 100;
+    linea.style.setProperty('--avance', `${p}%`);
     linea.setAttribute('aria-valuenow', Math.round(p));
-    tiempo.textContent = `${reloj(video.currentTime)} / ${video.duration ? reloj(video.duration) : dur}`;
+    if (video.duration) tiempo.textContent = `${reloj(fraccion * video.duration)} / ${reloj(Math.round(video.duration))}`;
+  }
+
+  video.addEventListener('timeupdate', () => {
+    if (!arrastrando && video.duration) pintar(video.currentTime / video.duration);
   });
 
   // la barra se esconde sola a los 2 s sin mover el mouse
@@ -91,36 +105,57 @@ export function montarReproductor(caja) {
     repro.classList.remove('repro--quieta');
     clearTimeout(quieto);
     if (video.paused) return;
-    quieto = setTimeout(() => repro.classList.add('repro--quieta'), 2000);
+    quieto = setTimeout(() => {
+      if (!arrastrando) repro.classList.add('repro--quieta');
+    }, 2000);
   }
   repro.addEventListener('pointermove', despertar);
-  repro.addEventListener('pointerleave', () => {
-    if (!video.paused) repro.classList.add('repro--quieta');
+  repro.addEventListener('pointerleave', (e) => {
+    if (e.pointerType === 'mouse' && !arrastrando && !video.paused) repro.classList.add('repro--quieta');
   });
+
+  // Al arrastrar, la línea sigue al dedo al instante y el video salta al último punto
+  // cuando termina el salto anterior: así no se traba pidiéndole un salto por movimiento.
+  let destino = null;
+  function saltar() {
+    if (destino === null || !video.duration || video.seeking) return;
+    video.currentTime = destino * video.duration;
+    destino = null;
+  }
+  video.addEventListener('seeked', saltar);
+  video.addEventListener('loadedmetadata', saltar);
 
   function buscarEn(clientX) {
     const r = linea.getBoundingClientRect();
     const p = Math.min(Math.max((clientX - r.left) / r.width, 0), 1);
-    if (video.duration) video.currentTime = p * video.duration;
-    else avance.style.width = `${p * 100}%`;
+    pintar(p);
+    destino = p;
+    saltar();
   }
 
   linea.addEventListener('pointerdown', (e) => {
     cargar();
     linea.setPointerCapture(e.pointerId);
+    arrastrando = true;
+    repro.classList.add('repro--arrastrando');
     buscarEn(e.clientX);
     const mover = (ev) => buscarEn(ev.clientX);
     const soltar = () => {
+      arrastrando = false;
+      repro.classList.remove('repro--arrastrando');
       linea.removeEventListener('pointermove', mover);
-      linea.removeEventListener('pointerup', soltar);
+      linea.removeEventListener('lostpointercapture', soltar);
+      despertar();
     };
     linea.addEventListener('pointermove', mover);
-    linea.addEventListener('pointerup', soltar);
+    linea.addEventListener('lostpointercapture', soltar);
   });
 
   linea.addEventListener('keydown', (e) => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     e.preventDefault();
+    // las flechas mueven el video, no pasan de proyecto
+    e.stopPropagation();
     cargar();
     video.currentTime = Math.max(0, video.currentTime + (e.key === 'ArrowRight' ? 5 : -5));
   });

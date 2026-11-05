@@ -75,7 +75,7 @@ export const proyectos = [
       archivo: '/video/anda-pidiendo.mp4',
       poster: '/img/anda-pidiendo/poster-video.jpg',
       alt: 'Fotograma del videocaso en el andén del subte',
-      dur: '00:53',
+      dur: '00:58',
     },
     tira: [
       { img: '/img/anda-pidiendo/anden.jpg', alt: 'Andén del subte' },
