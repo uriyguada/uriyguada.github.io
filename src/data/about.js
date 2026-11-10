@@ -21,9 +21,8 @@ export const about = [
       'Soy Uri, tengo 24 años y soy diseñador multimedial y director de arte. Hoy trabajo como freelance para agencias como Zurda, Dogs Dock, Not Agency y Encender, y fundé Uricó, un estudio creativo especializado en branding y motion.',
       'Mi historia con la creatividad empezó a los 12, cuando conocí a Lyna, una creadora de contenido infantil que en ese momento tenía 80.000 suscriptores en YouTube y hoy supera los 35 millones. Yo era su fan y ella terminó siendo fan de lo que yo hacía, así que durante seis años trabajé diseñando su marca, sus libros y su merchandising, además de crear contenido para su canal.',
       'A la par fui probando otras formas de contar historias. Tuve un canal de YouTube que llegó al millón de suscriptores y creé el videojuego de Lyna, que ya jugaron más de 30 millones de personas. También escribí el libro Secretos, una serie animada infantil y Boda Lyniel, una obra de teatro que se presentó en el Gran Rex y después salió de gira por otros países.',
-      'Me gusta imaginar cosas y convertirlas en historias. Dicen que tengo muchas refes en la cabeza, y aunque no sé bien dónde las guardo, cuando hacen falta aparecen. También saco fotos con una cámara analógica y dejo pasar meses antes de revelar el rollo, porque me encanta encontrarme con fotos que ya había olvidado.',
+      'Dicen que tengo muchas refes en la cabeza, y aunque no sé bien dónde las guardo, cuando hacen falta aparecen.',
       'Me formé en Brother, donde gané siete premios en el festival interno, y también me llevé un Oro en los Premios Obrar.',
-      'Hay cosas que defiendo a muerte. El pastel de papa va papa-carne-papa y nunca carne-papa, las medialunas de manteca son mejores que las de grasa y no hay gusto de helado que le gane a la menta granizada. Lo que no puedo defender tanto es mi costumbre de comprar libros que después no llego a leer.',
       'La publicidad es lo que más me apasiona y tengo muchísimas ganas de seguir pensando muuchas ideas. Si tu agencia está buscando a alguien así, menos mal que leíste hasta el final.',
     ],
     estudios: [
