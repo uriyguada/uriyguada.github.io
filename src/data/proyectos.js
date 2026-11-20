@@ -119,7 +119,7 @@ export const proyectos = [
       archivo: '/video/mucha-merd.mp4',
       poster: '/img/mucha-merd/poster-video-frases.jpg',
       alt: 'Fotograma del videocaso: las frases que escucharon los grandes creativos',
-      dur: '01:33',
+      dur: '01:31',
     },
     tira: [
       { img: '/img/mucha-merd/bayala.jpg', alt: 'El audio de WhatsApp de Carlos Bayala' },
