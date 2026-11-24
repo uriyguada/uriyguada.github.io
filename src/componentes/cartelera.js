@@ -1,4 +1,4 @@
-// Cartelera: las 8 entradas. Al tocar una se abre su ficha.
+// Cartelera: las 7 entradas. Al tocar una se abre su ficha.
 import { proyectos } from '../data/proyectos.js';
 
 // Cada título se achica lo justo para entrar en su entrada (las palabras largas no se cortan).

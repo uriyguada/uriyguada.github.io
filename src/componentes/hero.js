@@ -7,6 +7,8 @@ const sinAlfaEnWebm =
   /iP(hone|ad|od)/.test(ua) ||
   (/Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR|Android|CriOS|FxiOS/.test(ua));
 
+const VELOCIDAD = 2;
+
 const MEDIDAS = {
   horizontal: '1920 / 806',
   vertical: '1400 / 1223',
@@ -34,6 +36,10 @@ function animado(variante) {
   video.autoplay = true;
   video.preload = 'auto';
   video.src = `/logo/uri-y-guada-${variante}.webm`;
+  // el logo se arma al doble de velocidad (el WebP de Safari ya viene acelerado)
+  video.defaultPlaybackRate = VELOCIDAD;
+  video.playbackRate = VELOCIDAD;
+  video.addEventListener('loadedmetadata', () => (video.playbackRate = VELOCIDAD));
   // si el navegador no puede con el webm, queda el logo quieto
   video.addEventListener('error', () => video.replaceWith(marcar(estatico(variante), variante)));
   video.play().catch(() => {});

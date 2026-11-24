@@ -145,6 +145,13 @@
   height: 34px;
 }
 
+/* si la última fila queda con una sola entrada, va centrada */
+.cartelera__item:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - clamp(26px, 3.9vw, 56px)) / 2);
+}
+
 /* Con el zoom de escritorio sobra ancho: las entradas mantienen su proporción
    y se acomodan de a varias por fila, centradas. */
 @media (min-width: 1024px) {
@@ -170,6 +177,10 @@
 @media (max-width: 1000px) {
   .cartelera__grilla {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cartelera__item:last-child:nth-child(odd) {
+    width: 100%;
   }
 
   .entrada {

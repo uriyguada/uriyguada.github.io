@@ -16,7 +16,7 @@ Paquete listo para que Claude Code arme la web y la publique en GitHub Pages.
 | `CLAUDE.md` | Reglas, stack y sistema visual (Claude Code lo lee siempre) |
 | `docs/ESPEC.md` | Cada pantalla e interacción en detalle: rotura del ticket, visor horizontal, tierlist, reproductor |
 | `src/data/proyectos.js` | Todo el contenido: textos, colores, pegatinas, imágenes, videos y contactos |
-| `public/img/` | Imágenes de los 8 proyectos y las fotos de Uri y Guada |
+| `public/img/` | Imágenes de los 7 proyectos y las fotos de Uri y Guada |
 | `public/fonts/` | Advercase y Roycella |
 | `public/sound/` | 3 variantes del sonido de la entrada rompiéndose (webm + mp3) |
 | `public/textura/grano.png` | Grano de papel |
@@ -49,11 +49,11 @@ npm run build   # dist/
 | Parte | Estado |
 |---|---|
 | Hero (entrada partida, firma con el `&` integrado, escritura en tinta) | Hecho |
-| Cartelera: 8 entradas + rotura con sonido | Hecho (abre la ficha; al cerrar, la entrada se recompone) |
+| Cartelera: 7 entradas + rotura con sonido | Hecho (abre la ficha; al cerrar, la entrada se recompone) |
 | Sacá tu entrada | Hecho (el mail se copia y el talón sella) |
 | Tierlist: arrastre, elegir y colocar, reiniciar, PNG 1080×1350 | Hecho |
 | Mobile (360–720) | Hecho |
-| Visor horizontal + fichas de los 8 proyectos | Hecho (flechas, teclado, rueda, arrastre, URL `#/funcion/slug`) |
+| Visor horizontal + fichas de los 7 proyectos | Hecho (flechas, teclado, rueda, arrastre, URL `#/funcion/slug`) |
 | Videocasos + reproductor A (línea) | Hecho: los 6 videos comprimidos a 1080p en `public/video/` |
 | Publicación | Hecho: **https://uriyguada.github.io/** (repo `uriyguada/uriyguada.github.io`) |
 
